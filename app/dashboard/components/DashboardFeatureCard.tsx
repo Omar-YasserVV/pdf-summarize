@@ -14,7 +14,7 @@ export function DashboardFeatureCard({
   color,
 }: DashboardFeatureCardProps) {
   return (
-    <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-8 transition-all hover:border-slate-700">
+    <div className="rounded-3xl border border-slate-800 bg-secondary p-8 transition-all hover:border-slate-700">
       <div
         className={`mb-6 flex h-12 w-12 items-center justify-center rounded-full ${color} text-white shadow-lg`}
       >
