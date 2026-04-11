@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import { useState } from "react"
 import { Settings2, Sparkles } from "lucide-react"
 import { Slider } from "@/components/ui/slider"
 import { Badge } from "@/components/ui/badge"
