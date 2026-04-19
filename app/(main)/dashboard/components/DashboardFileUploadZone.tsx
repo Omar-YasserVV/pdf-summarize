@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import { useCallback } from "react"
-import { useDropzone } from "react-dropzone"
-import { Upload } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useCallback } from 'react'
+import { useDropzone } from 'react-dropzone'
+import { Upload } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export default function DashboardFileUploadZone() {
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -13,15 +13,15 @@ export default function DashboardFileUploadZone() {
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     onDrop,
     accept: {
-      "application/pdf": [".pdf"],
-      "application/msword": [".doc"],
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-        [".docx"],
-      "application/vnd.ms-powerpoint": [".ppt"],
-      "application/vnd.openxmlformats-officedocument.presentationml.presentation":
-        [".pptx"],
-      "image/jpeg": [".jpg", ".jpeg"],
-      "image/png": [".png"],
+      'application/pdf': ['.pdf'],
+      'application/msword': ['.doc'],
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+        ['.docx'],
+      'application/vnd.ms-powerpoint': ['.ppt'],
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+        ['.pptx'],
+      'image/jpeg': ['.jpg', '.jpeg'],
+      'image/png': ['.png'],
     },
     maxSize: 25 * 1024 * 1024, // 25MB
     maxFiles: 5,
@@ -44,8 +44,8 @@ export default function DashboardFileUploadZone() {
         {...getRootProps()}
         className={`relative flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-12 transition-all ${
           isDragActive
-            ? "border-cyan-400 bg-cyan-400/5"
-            : "border-slate-700 bg-[#161b2c] hover:bg-[#1c223a]"
+            ? 'border-cyan-400 bg-cyan-400/5'
+            : 'border-slate-700 bg-[#161b2c] hover:bg-[#1c223a]'
         }`}
       >
         <input {...getInputProps()} />
@@ -67,7 +67,7 @@ export default function DashboardFileUploadZone() {
 
         {/* Choose Files Button */}
         <Button
-          className="mt-6 rounded-xl bg-cyan-400 px-8 font-semibold text-slate-900 hover:bg-cyan-500"
+          className="mt-6 cursor-pointer rounded-xl bg-cyan-400 px-8 font-semibold text-slate-900 hover:bg-cyan-500"
           onClick={(e) => {
             e.stopPropagation()
             open()

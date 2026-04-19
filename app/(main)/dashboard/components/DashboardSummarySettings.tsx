@@ -1,24 +1,24 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { Settings2, Sparkles } from "lucide-react"
-import { Slider } from "@/components/ui/slider"
-import { Badge } from "@/components/ui/badge"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Button } from "@/components/ui/button"
+import { useState } from 'react'
+import { Settings2, Sparkles } from 'lucide-react'
+import { Slider } from '@/components/ui/slider'
+import { Badge } from '@/components/ui/badge'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Button } from '@/components/ui/button'
 
 const focusAreas = [
-  "Key Points",
-  "Methodology",
-  "Results",
-  "Conclusions",
-  "Background",
-  "Statistics",
+  'Key Points',
+  'Methodology',
+  'Results',
+  'Conclusions',
+  'Background',
+  'Statistics',
 ]
 
 export default function DashboardSummarySettings() {
   const [length, setLength] = useState([50]) // 0=Short, 50=Medium, 100=Long
-  const [selectedFocus, setSelectedFocus] = useState("Key Points")
+  const [selectedFocus, setSelectedFocus] = useState('Key Points')
 
   return (
     <div className="w-full rounded-3xl border border-slate-800 bg-[#1e2336] p-6 text-slate-200">
@@ -37,8 +37,8 @@ export default function DashboardSummarySettings() {
       <div className="mb-8 space-y-6">
         <div className="flex items-center justify-between">
           <span className="text-sm font-medium">Summary Length</span>
-          <Badge className="border-none bg-cyan-400/20 px-3 text-cyan-400 hover:bg-cyan-400/30">
-            {length[0] <= 33 ? "Short" : length[0] <= 66 ? "Medium" : "Long"}
+          <Badge className="border-none bg-primary px-3 text-slate-900">
+            {length[0] <= 33 ? 'Short' : length[0] <= 66 ? 'Medium' : 'Long'}
           </Badge>
         </div>
 
@@ -47,7 +47,7 @@ export default function DashboardSummarySettings() {
           onValueChange={setLength}
           max={100}
           step={50}
-          className="py-4"
+          className="mb-4"
         />
 
         <div className="flex justify-between text-[11px] font-bold tracking-wider text-slate-500 uppercase">
@@ -59,17 +59,17 @@ export default function DashboardSummarySettings() {
         {/* Card Selectors */}
         <div className="mt-4 grid gap-2 md:grid-cols-2 lg:grid-cols-3">
           {[
-            { label: "Short", desc: "1-2 paragraphs", val: 0 },
-            { label: "Medium", desc: "3-5 paragraphs", val: 50 },
-            { label: "Long", desc: "5+ paragraphs", val: 100 },
+            { label: 'Short', desc: '1-2 paragraphs', val: 0 },
+            { label: 'Medium', desc: '3-5 paragraphs', val: 50 },
+            { label: 'Long', desc: '5+ paragraphs', val: 100 },
           ].map((item) => (
             <div
               key={item.label}
               onClick={() => setLength([item.val])}
               className={`cursor-pointer rounded-xl border p-3 transition-all ${
                 length[0] === item.val
-                  ? "border-cyan-500 bg-cyan-500/10 text-cyan-400"
-                  : "border-slate-800 bg-[#161b2c] text-slate-500"
+                  ? 'border-cyan-500 bg-cyan-500/10 text-cyan-400'
+                  : 'border-slate-800 bg-[#161b2c] text-slate-500'
               }`}
             >
               <p className="text-xs font-bold">{item.label}</p>
@@ -84,16 +84,16 @@ export default function DashboardSummarySettings() {
       {/* Focus Areas */}
       <div className="mb-8">
         <h3 className="mb-4 text-sm font-medium">Focus Areas (Optional)</h3>
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-4">
           {focusAreas.map((area) => (
             <Badge
               key={area}
               variant="outline"
               onClick={() => setSelectedFocus(area)}
-              className={`cursor-pointer rounded-full border-slate-700 px-4 py-1 transition-colors ${
+              className={`w-full cursor-pointer rounded-full border-slate-700 px-4 py-1 transition-colors ${
                 selectedFocus === area
-                  ? "border-cyan-400 bg-cyan-400 text-slate-900"
-                  : "bg-slate-800/40 text-slate-400 hover:bg-slate-700"
+                  ? 'border-cyan-400 bg-cyan-400 text-slate-900'
+                  : 'bg-slate-800/40 text-slate-400 hover:bg-slate-700'
               }`}
             >
               {area}
@@ -108,7 +108,7 @@ export default function DashboardSummarySettings() {
         <div className="flex items-center space-x-3">
           <Checkbox
             id="bullets"
-            className="border-slate-600 data-[state=checked]:bg-cyan-500"
+            className="cursor-pointer border-slate-600 data-[state=checked]:bg-cyan-500"
           />
           <label
             htmlFor="bullets"
@@ -120,7 +120,7 @@ export default function DashboardSummarySettings() {
         <div className="flex items-center space-x-3">
           <Checkbox
             id="conclusion"
-            className="border-slate-600 data-[state=checked]:bg-cyan-500"
+            className="cursor-pointer border-slate-600 data-[state=checked]:bg-cyan-500"
           />
           <label
             htmlFor="conclusion"
@@ -132,7 +132,7 @@ export default function DashboardSummarySettings() {
       </div>
 
       {/* Action Button */}
-      <Button className="mb-4 h-12 w-full rounded-xl bg-[#1a6b7e] font-semibold text-white hover:bg-[#155a6a]">
+      <Button className="mb-4 h-12 w-full cursor-pointer rounded-xl bg-[#1a6b7e] font-semibold text-white hover:bg-[#155a6a]">
         <Sparkles className="mr-2 h-4 w-4" />
         Generate AI Summary
       </Button>
