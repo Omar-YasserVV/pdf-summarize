@@ -17,15 +17,15 @@ export default function SignIn() {
             <div className="mb-2 text-xs font-medium tracking-widest text-slate-500 uppercase">
               Welcome back
             </div>
-            <div className="relative h-24 w-48">
-              {/* Replace with your actual logo asset */}
-              <div className="flex h-full w-full flex-col items-center justify-center">
-                <div className="text-3xl font-bold text-cyan-400">
-                  EL KHOLASA
-                </div>
-                <div className="text-[10px] text-slate-400">
-                  SIP THE KNOWLEDGE . SKIP THE PAGES
-                </div>
+            <div className="relative mt-5">
+              <div className="flex h-25! w-75! flex-col items-center justify-center">
+                <Image
+                  src="/logo.png"
+                  alt="Logo"
+                  width={1000}
+                  height={1000}
+                  className="object-contain"
+                />
               </div>
             </div>
           </div>
@@ -89,7 +89,6 @@ export default function SignIn() {
                   Forgot password?
                 </Link>
               </div>
-
               <Button className="h-12 w-full rounded-xl bg-cyan-400 font-bold text-slate-900 hover:bg-cyan-500">
                 Sign In
               </Button>
@@ -97,7 +96,7 @@ export default function SignIn() {
 
             <p className="mt-6 text-center text-sm text-slate-400">
               Don't have an account?{' '}
-              <Link href="#" className="text-cyan-500 hover:underline">
+              <Link href="/sign-up" className="text-cyan-500 hover:underline">
                 Sign up
               </Link>
             </p>
@@ -110,7 +109,7 @@ export default function SignIn() {
         {/* Background Image with Cyan Overlay */}
         <div className="absolute inset-0 z-0 bg-[#0d8ca1]/80">
           <Image
-            src="/workspace-bg.jpg" // Use a high-quality desk/office photo
+            src="/background.jpg" // Use a high-quality desk/office photo
             alt="Workspace"
             fill
             className="object-cover opacity-50 mix-blend-overlay"

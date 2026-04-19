@@ -1,19 +1,9 @@
-import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import {
-  User,
-  Mail,
-  Lock,
-  ArrowLeft,
-  Star,
-  Users,
-  FileCheck,
-} from 'lucide-react'
+import { User, Mail, Lock, ArrowLeft, Star } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Checkbox } from '@/components/ui/checkbox'
 
 export default function SignUp() {
   return (
@@ -23,14 +13,15 @@ export default function SignUp() {
         <div className="w-full max-w-md space-y-6">
           {/* Logo Section */}
           <div className="flex flex-col items-center text-center">
-            <div className="relative mb-4 h-20 w-40">
-              <div className="flex h-full w-full flex-col items-center justify-center">
-                <div className="text-3xl font-bold text-cyan-400">
-                  EL KHOLASA
-                </div>
-                <div className="text-[10px] tracking-tighter text-slate-400">
-                  SIP THE KNOWLEDGE . SKIP THE PAGES
-                </div>
+            <div className="relative my-5">
+              <div className="flex h-25! w-75! flex-col items-center justify-center">
+                <Image
+                  src="/logo.png"
+                  alt="Logo"
+                  width={1000}
+                  height={1000}
+                  className="object-contain"
+                />
               </div>
             </div>
             <h2 className="font-medium text-slate-200">Create your account</h2>
@@ -123,14 +114,15 @@ export default function SignUp() {
               <Button className="h-11 w-full rounded-xl bg-cyan-400 font-bold text-slate-900 hover:bg-cyan-500">
                 Create Account
               </Button>
-
-              <Button
-                variant="ghost"
-                className="h-11 w-full text-slate-400 hover:bg-slate-800/50 hover:text-slate-200"
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Login
-              </Button>
+              <Link href="/sign-in">
+                <Button
+                  variant="ghost"
+                  className="h-11 w-full cursor-pointer text-slate-400 hover:bg-slate-800/50 hover:text-slate-200"
+                >
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Back to Login
+                </Button>
+              </Link>
             </form>
           </div>
 
@@ -147,7 +139,7 @@ export default function SignUp() {
       <div className="relative hidden w-1/2 lg:block">
         <div className="absolute inset-0 z-0 bg-[#0d8ca1]/90">
           <Image
-            src="/workspace-reading.jpg"
+            src="/background.jpg"
             alt="User reading"
             fill
             className="object-cover opacity-40 mix-blend-overlay"
