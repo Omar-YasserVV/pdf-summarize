@@ -1,6 +1,6 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -84,7 +84,7 @@
 
 .dark {
   /* === BASE === */
-  --background: oklch(18.02% 0.032 266.62); /* #0b1120 */
+  --background: oklch(12.88% 0.041 264.7);
   --foreground: oklch(0.985 0 0);
 
   /* === SURFACES === */
@@ -99,7 +99,7 @@
   --primary-foreground: oklch(0.13 0.04 260);
 
   /* === SECONDARY === */
-  --secondary: oklch(22.55% 0.039 267.86);
+  --secondary: #0f172a;
   --secondary-foreground: oklch(0.985 0 0);
 
   /* === MUTED === */

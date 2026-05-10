@@ -1,4 +1,5 @@
 export const user = {
-  username: "Mohammed Hassan",
-  email: "mohammedHassan@gmail.com",
+  image: 'https://github.com/shadcn.png',
+  username: 'Mohammed Hassan',
+  email: 'mohammedHassan@gmail.com',
 }
