@@ -1,4 +1,5 @@
 import BottomNav from '@/components/BottomNav'
+import FloatingAIButton from '@/components/FloatingAIButton'
 import Navbar from '@/components/Navbar'
 
 export default function MainLayout({
@@ -8,7 +9,8 @@ export default function MainLayout({
 }) {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <FloatingAIButton />
       <main className="container mx-auto mb-18">{children}</main>
       <BottomNav />
     </>
