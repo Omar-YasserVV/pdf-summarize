@@ -11,7 +11,7 @@ export default function BottomNav() {
   const navLinks = [
     { href: '/dashboard', label: 'Home', icon: Home },
     { href: '/history', label: 'History', icon: History },
-    { href: '/saved', label: 'Saved', icon: Bookmark },
+    { href: '/notifications', label: 'Saved', icon: Bookmark },
     { href: '/profile', label: 'Profile', icon: User },
   ]
 

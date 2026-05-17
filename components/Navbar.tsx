@@ -4,6 +4,7 @@ import { Sun, Bell } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { user } from '@/constants/user'
+import Link from 'next/link'
 
 export default function Navbar() {
   return (
@@ -40,13 +41,15 @@ export default function Navbar() {
           </Button>
 
           <div className="relative">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-11 w-11 rounded-lg bg-[#0f1323] text-slate-300 hover:bg-slate-900! hover:text-white"
-            >
-              <Bell className="h-6! w-6! text-[#94a3b8]" />
-            </Button>
+            <Link href="/notifications">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-11 w-11 cursor-pointer rounded-lg bg-[#0f1323] text-slate-300 hover:bg-slate-900! hover:text-white"
+              >
+                <Bell className="h-6! w-6! text-[#94a3b8]" />
+              </Button>
+            </Link>
             {/* Notification Dot */}
             <span className="absolute top-1 right-1.75 h-2 w-2 rounded-full bg-sky-400 ring-2 ring-[#020617]" />
           </div>

@@ -95,7 +95,7 @@
   --popover-foreground: oklch(0.985 0 0);
 
   /* === PRIMARY (cyan accent) === */
-  --primary: oklch(0.76 0.16 232); /* #30c3f4 vibe */
+  --primary: oklch(75.35% 0.139 232.66); /* #30c3f4 vibe */
   --primary-foreground: oklch(0.13 0.04 260);
 
   /* === SECONDARY === */
