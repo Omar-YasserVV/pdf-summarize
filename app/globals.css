@@ -88,14 +88,14 @@
   --foreground: oklch(0.985 0 0);
 
   /* === SURFACES === */
-  --card: oklch(0.17 0.05 270); /* #141b2e */
+  --card: oklch(0.17 0.05 270);
   --card-foreground: oklch(0.985 0 0);
 
   --popover: oklch(0.17 0.05 270);
   --popover-foreground: oklch(0.985 0 0);
 
   /* === PRIMARY (cyan accent) === */
-  --primary: oklch(75.35% 0.139 232.66); /* #30c3f4 vibe */
+  --primary: oklch(75.35% 0.139 232.66);
   --primary-foreground: oklch(0.13 0.04 260);
 
   /* === SECONDARY === */
@@ -148,5 +148,56 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+/* ============================================================
+   SCROLL INDICATOR KEYFRAMES
+   Used by the UpgradePremium modal scroll indicator
+   ============================================================ */
+
+@keyframes chevronWave {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: rotate(45deg) scale(0.85);
+  }
+  40% {
+    opacity: 1;
+    transform: rotate(45deg) scale(1.1);
+  }
+}
+
+@keyframes lineStreak {
+  0% {
+    top: -100%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    top: 120%;
+    opacity: 0;
+  }
+}
+
+@keyframes dotPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 6px 2px rgba(46, 200, 244, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 16px 6px rgba(46, 200, 244, 0.85);
+  }
+}
+
+@keyframes labelPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
   }
 }
