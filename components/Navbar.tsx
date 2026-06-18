@@ -2,26 +2,21 @@
 
 import { Sun, Bell } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { user } from '@/constants/user'
 import Link from 'next/link'
+import { useAuthStore } from '@/store/useAuthStore'
 
 export default function Navbar() {
+  const user = useAuthStore((state) => state.user)
+
   return (
     <nav className="sticky top-0 z-50 container m-auto bg-background px-4 py-5">
       <div className="flex items-center justify-between">
         {/* Left Side: Profile & Welcome */}
         <div className="flex items-center gap-3">
-          <Avatar className="h-10 w-10 border-2 border-blue-500 md:h-13 md:w-13">
-            <AvatarImage src={user.image} />
-            <AvatarFallback className="bg-sky-500 text-lg text-white">
-              {user.username.slice(0, 1)}
-            </AvatarFallback>
-          </Avatar>
           <div className="flex flex-col">
             <h1 className="text-base font-bold text-white md:text-lg">
               Welcome back,{' '}
-              <span className="capitalize">{user.username.split(' ')[0]}</span>
+              <span className="capitalize">{user?.name?.split(' ')[0] || 'User'}</span>
             </h1>
             <p className="text-xs text-slate-400 md:text-sm">
               What would you like to summarize today?
