@@ -39,6 +39,27 @@ export interface RegisterPayload {
 
 export type RegisterResponse = ApiResponse<unknown>;
 
+// Password management payloads
+export interface ChangePasswordPayload {
+  oldPassword: string;
+  newPassword: string;
+}
+
+export interface ForgotPasswordPayload {
+  email: string;
+}
+
+export interface VerifyOtpPayload {
+  email: string;
+  token: string;
+}
+
+export interface ResetPasswordPayload {
+  email: string;
+  token: string;
+  newPassword: string;
+}
+
 export function useLoginMutation() {
   const router = useRouter();
   const setAuth = useAuthStore((state) => state.setAuth);
@@ -88,6 +109,54 @@ export function useRegisterMutation() {
     onSuccess: () => {
       // Redirect user to sign-in page
       router.push("/sign-in");
+    },
+  });
+}
+
+export function useChangePasswordMutation() {
+  return useMutation<ApiResponse<unknown>, Error, ChangePasswordPayload>({
+    mutationFn: async (payload) => {
+      const response = await apiClient.post<ApiResponse<unknown>>("/api/Auth/change-password", payload);
+      if (!response.success) {
+        throw new Error(response.message || response.error || "Failed to change password.");
+      }
+      return response;
+    },
+  });
+}
+
+export function useForgotPasswordMutation() {
+  return useMutation<ApiResponse<unknown>, Error, ForgotPasswordPayload>({
+    mutationFn: async (payload) => {
+      const response = await apiClient.post<ApiResponse<unknown>>("/api/Auth/forgot-password", payload);
+      if (!response.success) {
+        throw new Error(response.message || response.error || "Failed to send reset code.");
+      }
+      return response;
+    },
+  });
+}
+
+export function useVerifyOtpMutation() {
+  return useMutation<ApiResponse<unknown>, Error, VerifyOtpPayload>({
+    mutationFn: async (payload) => {
+      const response = await apiClient.post<ApiResponse<unknown>>("/api/Auth/verify-otp", payload);
+      if (!response.success) {
+        throw new Error(response.message || response.error || "Invalid verification code.");
+      }
+      return response;
+    },
+  });
+}
+
+export function useResetPasswordMutation() {
+  return useMutation<ApiResponse<unknown>, Error, ResetPasswordPayload>({
+    mutationFn: async (payload) => {
+      const response = await apiClient.post<ApiResponse<unknown>>("/api/Auth/reset-password", payload);
+      if (!response.success) {
+        throw new Error(response.message || response.error || "Failed to reset password.");
+      }
+      return response;
     },
   });
 }

@@ -4,15 +4,11 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-import SettingsProfileTaps from './SettingsProfileTaps'
 import { user } from '@/constants/user'
 
 export default function ProfileSettings() {
   return (
     <div className="w-full space-y-6">
-      {/* Navigation Tabs */}
-      <SettingsProfileTaps />
-
       {/* Main Content Card */}
       <div className="space-y-6 rounded-3xl border border-slate-800 bg-[#161b2c] p-8">
         {/* Header Section */}

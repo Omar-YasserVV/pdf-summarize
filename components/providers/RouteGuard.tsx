@@ -9,7 +9,8 @@ export default function RouteGuard({ children }: { children: React.ReactNode }) 
   const pathname = usePathname();
   const { token, isHydrated } = useAuthStore();
 
-  const isAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
+  const isAuthPage =
+    pathname === "/sign-in" || pathname === "/sign-up" || pathname === "/forgot-password";
 
   useEffect(() => {
     if (!isHydrated) return;
