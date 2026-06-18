@@ -1,11 +1,47 @@
+"use client";
+
 import Image from 'next/image'
 import Link from 'next/link'
+import React, { useState } from 'react'
 import { User, Mail, Lock, ArrowLeft, Star } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useRegisterMutation } from '@/hooks/useAuth'
 
 export default function SignUp() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [validationError, setValidationError] = useState<string | null>(null)
+
+  const registerMutation = useRegisterMutation()
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setValidationError(null)
+
+    if (!name || !email || !password || !confirmPassword) {
+      setValidationError('All fields are required.')
+      return
+    }
+
+    if (password !== confirmPassword) {
+      setValidationError('Passwords do not match.')
+      return
+    }
+
+    if (password.length < 6) {
+      setValidationError('Password must be at least 6 characters.')
+      return
+    }
+
+    registerMutation.mutate({ name, email, password })
+  }
+
+  const errorMessage = validationError || (registerMutation.isError ? registerMutation.error.message : null)
+
   return (
     <div className="flex min-h-screen w-full bg-[#0a0f1e]">
       {/* Left Column: Registration Form */}
@@ -39,7 +75,14 @@ export default function SignUp() {
               </p>
             </div>
 
-            <form className="space-y-4">
+            {/* Error Message */}
+            {errorMessage && (
+              <div className="mb-4 rounded-2xl border border-red-500/20 bg-red-500/5 p-4 text-sm text-red-400">
+                {errorMessage}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-1.5">
                 <Label htmlFor="name" className="text-xs text-slate-400">
                   Full Name
@@ -48,6 +91,10 @@ export default function SignUp() {
                   <User className="absolute top-3 left-3 h-4 w-4 text-slate-500" />
                   <Input
                     id="name"
+                    required
+                    disabled={registerMutation.isPending}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="John Doe"
                     className="h-11 border-slate-800 bg-[#0f172a] pl-10 text-sm text-slate-200"
                   />
@@ -62,6 +109,11 @@ export default function SignUp() {
                   <Mail className="absolute top-3 left-3 h-4 w-4 text-slate-500" />
                   <Input
                     id="email"
+                    type="email"
+                    required
+                    disabled={registerMutation.isPending}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com"
                     className="h-11 border-slate-800 bg-[#0f172a] pl-10 text-sm text-slate-200"
                   />
@@ -77,6 +129,10 @@ export default function SignUp() {
                   <Input
                     id="password"
                     type="password"
+                    required
+                    disabled={registerMutation.isPending}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••"
                     className="h-11 border-slate-800 bg-[#0f172a] pl-10 text-sm text-slate-200"
                   />
@@ -92,6 +148,10 @@ export default function SignUp() {
                   <Input
                     id="confirm"
                     type="password"
+                    required
+                    disabled={registerMutation.isPending}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="••••••"
                     className="h-11 border-slate-800 bg-[#0f172a] pl-10 text-sm text-slate-200"
                   />
@@ -111,12 +171,25 @@ export default function SignUp() {
                 </p>
               </div>
 
-              <Button className="h-11 w-full rounded-xl bg-cyan-400 font-bold text-slate-900 hover:bg-cyan-500">
-                Create Account
+              <Button
+                type="submit"
+                disabled={registerMutation.isPending}
+                className="h-11 w-full rounded-xl bg-cyan-400 font-bold text-slate-900 hover:bg-cyan-500 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              >
+                {registerMutation.isPending ? (
+                  <>
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-slate-900 border-t-transparent"></span>
+                    Creating Account...
+                  </>
+                ) : (
+                  'Create Account'
+                )}
               </Button>
               <Link href="/sign-in">
                 <Button
                   variant="ghost"
+                  type="button"
+                  disabled={registerMutation.isPending}
                   className="h-11 w-full cursor-pointer text-slate-400 hover:bg-slate-800/50 hover:text-slate-200"
                 >
                   <ArrowLeft className="mr-2 h-4 w-4" />
@@ -185,3 +258,4 @@ export default function SignUp() {
     </div>
   )
 }
+

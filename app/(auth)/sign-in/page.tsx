@@ -1,12 +1,27 @@
+"use client";
+
 import Image from 'next/image'
 import Link from 'next/link'
+import React, { useState } from 'react'
 import { Mail, Lock, Sparkles, FileText, MessageSquare } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
+import { useLoginMutation } from '@/hooks/useAuth'
 
 export default function SignIn() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [remember, setRemember] = useState(false)
+  const loginMutation = useLoginMutation()
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email || !password) return
+    loginMutation.mutate({ email, password })
+  }
+
   return (
     <div className="flex min-h-screen w-full bg-[#0a0f1e]">
       {/* Left Column: Login Form */}
@@ -39,7 +54,14 @@ export default function SignIn() {
               </p>
             </div>
 
-            <form className="space-y-5">
+            {/* Error Message */}
+            {loginMutation.isError && (
+              <div className="mb-5 rounded-2xl border border-red-500/20 bg-red-500/5 p-4 text-sm text-red-400">
+                {loginMutation.error.message || 'Invalid email or password. Please try again.'}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-slate-300">
                   Email
@@ -48,6 +70,11 @@ export default function SignIn() {
                   <Mail className="absolute top-3 left-3 h-4 w-4 text-slate-500" />
                   <Input
                     id="email"
+                    type="email"
+                    required
+                    disabled={loginMutation.isPending}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com"
                     className="h-12 border-slate-800 bg-[#0f172a] pl-10 text-slate-200 focus:border-cyan-500 focus:ring-0"
                   />
@@ -55,7 +82,7 @@ export default function SignIn() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password" dir="rtl" className="text-slate-300">
+                <Label htmlFor="password" className="text-slate-300">
                   Password
                 </Label>
                 <div className="relative">
@@ -63,6 +90,10 @@ export default function SignIn() {
                   <Input
                     id="password"
                     type="password"
+                    required
+                    disabled={loginMutation.isPending}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••"
                     className="h-12 border-slate-800 bg-[#0f172a] pl-10 text-slate-200 focus:border-cyan-500 focus:ring-0"
                   />
@@ -73,6 +104,9 @@ export default function SignIn() {
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="remember"
+                    checked={remember}
+                    onCheckedChange={(checked) => setRemember(!!checked)}
+                    disabled={loginMutation.isPending}
                     className="border-slate-700 data-[state=checked]:bg-cyan-500"
                   />
                   <label
@@ -89,8 +123,20 @@ export default function SignIn() {
                   Forgot password?
                 </Link>
               </div>
-              <Button className="h-12 w-full rounded-xl bg-cyan-400 font-bold text-slate-900 hover:bg-cyan-500">
-                Sign In
+
+              <Button
+                type="submit"
+                disabled={loginMutation.isPending}
+                className="h-12 w-full rounded-xl bg-cyan-400 font-bold text-slate-900 hover:bg-cyan-500 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              >
+                {loginMutation.isPending ? (
+                  <>
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-slate-900 border-t-transparent"></span>
+                    Signing In...
+                  </>
+                ) : (
+                  'Sign In'
+                )}
               </Button>
             </form>
 
@@ -158,3 +204,4 @@ export default function SignIn() {
     </div>
   )
 }
+

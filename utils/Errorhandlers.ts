@@ -13,8 +13,8 @@ const extractMessage = (data: unknown, fallback: string): string => {
   if (!data || typeof data !== "object") return fallback;
   const d = data as Record<string, unknown>;
 
-  if (typeof d.message === "string") return d.message;
-
+  if (typeof d.message === "string" && d.message.trim() !== "") return d.message;
+  if (typeof d.error === "string" && d.error.trim() !== "") return d.error;
   if (Array.isArray(d.message)) return d.message.join(" ");
 
   return fallback;

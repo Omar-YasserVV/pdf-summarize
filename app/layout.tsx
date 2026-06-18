@@ -3,6 +3,8 @@ import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
+import QueryProvider from '@/components/providers/QueryProvider'
+import RouteGuard from '@/components/providers/RouteGuard'
 
 export const metadata: Metadata = {
   title: 'EL Kholasa - AI PDF Summarizer',
@@ -29,8 +31,13 @@ export default function RootLayout({
       )}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <QueryProvider>
+            <RouteGuard>{children}</RouteGuard>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
 }
+
