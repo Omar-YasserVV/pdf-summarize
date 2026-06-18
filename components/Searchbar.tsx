@@ -1,7 +1,14 @@
+"use client"
+
 import { Search } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 
-export default function SearchBar() {
+interface SearchBarProps {
+  value?: string
+  onChange?: (value: string) => void
+}
+
+export default function SearchBar({ value, onChange }: SearchBarProps) {
   return (
     <div className="group relative">
       {/* Search Icon */}
@@ -12,6 +19,8 @@ export default function SearchBar() {
       {/* Input Field */}
       <Input
         type="text"
+        value={value}
+        onChange={(e) => onChange?.(e.target.value)}
         placeholder="Search summaries, topics, or keywords..."
         className="h-14 w-full rounded-2xl border-slate-800 bg-secondary! pr-4 pl-12 text-slate-200 transition-all placeholder:text-slate-500 focus-visible:border-sky-500/50 focus-visible:ring-1 focus-visible:ring-sky-500/50"
       />
@@ -21,3 +30,4 @@ export default function SearchBar() {
     </div>
   )
 }
+
