@@ -24,16 +24,25 @@ function ActivityRow({ period, count, isLast }: ActivityRowProps) {
   )
 }
 
-export default function ActivitySummary() {
+interface ActivitySummaryProps {
+  activity: {
+    today: number
+    yesterday: number
+    thisWeek: number
+    thisMonth: number
+  }
+}
+
+export default function ActivitySummary({ activity }: ActivitySummaryProps) {
   const activityData = [
-    { id: 'today', period: 'Today', count: 5 },
-    { id: 'yesterday', period: 'Yesterday', count: 8 },
-    { id: 'this-week', period: 'This Week', count: 12 },
-    { id: 'this-month', period: 'This Month', count: 47 },
+    { id: 'today', period: 'Today', count: activity.today || 0 },
+    { id: 'yesterday', period: 'Yesterday', count: activity.yesterday || 0 },
+    { id: 'this-week', period: 'This Week', count: activity.thisWeek || 0 },
+    { id: 'this-month', period: 'This Month', count: activity.thisMonth || 0 },
   ]
 
   return (
-    <div className="w-full space-y-3.5">
+    <div className="w-full space-y-3.5 text-left">
       {/* Component Title */}
       <h3 className="px-1 text-base font-bold tracking-tight text-white md:text-lg">
         Activity Summary
@@ -53,3 +62,4 @@ export default function ActivitySummary() {
     </div>
   )
 }
+

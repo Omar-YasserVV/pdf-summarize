@@ -6,6 +6,7 @@ import ProfileSettings from './components/ProfileSettings'
 import DangerZone from './components/DangerZone'
 import SettingsProfileTaps from './components/SettingsProfileTaps'
 import SecuritySettings from './components/SecuritySettings'
+import ProfileDashboardStats from './components/ProfileDashboardStats'
 
 function Settings() {
   const [activeTab, setActiveTab] = useState('profile')
@@ -20,6 +21,7 @@ function Settings() {
       {/* Conditional rendering of cards */}
       {activeTab === 'profile' && (
         <>
+          <ProfileDashboardStats />
           <ProfileSettings />
           <DangerZone />
         </>

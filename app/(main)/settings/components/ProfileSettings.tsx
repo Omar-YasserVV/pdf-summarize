@@ -1,12 +1,15 @@
-import { User, Mail, Upload } from 'lucide-react'
+import { User as UserIcon, Mail, Upload } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-import { user } from '@/constants/user'
+import { useAuthStore } from '@/store/useAuthStore'
 
 export default function ProfileSettings() {
+  const storeUser = useAuthStore((state) => state.user)
+  const user = storeUser || { name: 'Guest', email: '', role: 'User' }
+
   return (
     <div className="w-full space-y-6">
       {/* Main Content Card */}
@@ -23,12 +26,6 @@ export default function ProfileSettings() {
 
         {/* Photo Upload Section */}
         <div className="flex items-center gap-6">
-          <Avatar className="h-24 w-24 border-2 border-slate-800">
-            <AvatarImage src="" />
-            <AvatarFallback className="bg-slate-800 text-2xl font-bold text-slate-400">
-              {user.username.slice(0, 1)}
-            </AvatarFallback>
-          </Avatar>
           <div className="space-y-3">
             <Button
               variant="outline"
@@ -50,10 +47,10 @@ export default function ProfileSettings() {
               Full Name
             </Label>
             <div className="relative">
-              <User className="absolute top-4 left-3 h-4 w-4 text-slate-500" />
+              <UserIcon className="absolute top-4 left-3 h-4 w-4 text-slate-500" />
               <Input
                 id="fullName"
-                defaultValue="mohammed hassan"
+                defaultValue={user.name || ''}
                 className="h-12 border-slate-800 bg-[#0f172a] pl-10 text-slate-200 focus:border-cyan-500 focus:ring-0"
               />
             </div>
@@ -67,7 +64,7 @@ export default function ProfileSettings() {
               <Mail className="absolute top-4 left-3 h-4 w-4 text-slate-500" />
               <Input
                 id="email"
-                defaultValue="mohammedhassan@gmail.com"
+                defaultValue={user.email || ''}
                 className="h-12 border-slate-800 bg-[#0f172a] pl-10 text-slate-200 focus:border-cyan-500 focus:ring-0"
               />
             </div>
@@ -82,9 +79,9 @@ export default function ProfileSettings() {
             </span>
             <Badge
               variant="secondary"
-              className="border-none bg-slate-800 text-slate-400"
+              className="border-none bg-slate-800 text-slate-400 capitalize"
             >
-              Basic
+              {user.role || 'Basic'}
             </Badge>
           </div>
           <div className="flex items-center justify-between">
@@ -92,7 +89,7 @@ export default function ProfileSettings() {
               Subscription Status
             </span>
             <Badge className="border-none bg-cyan-500/20 px-4 text-cyan-400">
-              trial
+              Trial
             </Badge>
           </div>
           <div className="flex items-center justify-between">
@@ -100,7 +97,7 @@ export default function ProfileSettings() {
               Member Since
             </span>
             <span className="text-sm font-medium text-slate-200">
-              February 6, 2026
+              June 18, 2026
             </span>
           </div>
         </div>

@@ -26,30 +26,39 @@ function AchievementCard({ label, emoji, isActive }: AchievementCardProps) {
   )
 }
 
-export default function AchievementsGrid() {
+interface AchievementsGridProps {
+  counters: {
+    totalSummaries: number
+  }
+  activity: {
+    thisWeek: number
+  }
+}
+
+export default function AchievementsGrid({ counters, activity }: AchievementsGridProps) {
   const achievements = [
     {
       id: 'first-summary',
       label: 'First Summary',
       emoji: '🎯',
-      isActive: false,
+      isActive: counters.totalSummaries >= 1,
     },
     {
       id: 'week-streak',
       label: 'Week Streak',
       emoji: '🔥',
-      isActive: true, // Highlights the middle active item with an illuminated outline
+      isActive: activity.thisWeek >= 1,
     },
     {
       id: 'fifty-summaries',
       label: '50 Summaries',
       emoji: '⭐',
-      isActive: false,
+      isActive: counters.totalSummaries >= 50,
     },
   ]
 
   return (
-    <div className="w-full space-y-3.5">
+    <div className="w-full space-y-3.5 text-left">
       {/* Section Label Title */}
       <h3 className="px-1 text-base font-bold tracking-tight text-white md:text-lg">
         Achievements
@@ -69,3 +78,4 @@ export default function AchievementsGrid() {
     </div>
   )
 }
+

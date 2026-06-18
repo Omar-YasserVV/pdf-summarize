@@ -1,11 +1,19 @@
 import { FileText, Clock, Award } from 'lucide-react'
 import { StatCard } from './ProfileStatCard'
 
-export default function DashboardStats() {
+interface DashboardStatsProps {
+  counters: {
+    totalSummaries: number
+    hoursSaved: number
+  }
+  thisWeekCount: number
+}
+
+export default function DashboardStats({ counters, thisWeekCount }: DashboardStatsProps) {
   const stats = [
     {
       id: 'total-summaries',
-      value: '47',
+      value: String(counters.totalSummaries || 0),
       label: 'Total Summaries',
       icon: FileText,
       iconColor: 'text-cyan-400',
@@ -13,7 +21,7 @@ export default function DashboardStats() {
     },
     {
       id: 'hours-saved',
-      value: '23.5',
+      value: String(counters.hoursSaved || 0),
       label: 'Hours Saved',
       icon: Clock,
       iconColor: 'text-blue-400',
@@ -21,7 +29,7 @@ export default function DashboardStats() {
     },
     {
       id: 'this-week',
-      value: '12',
+      value: String(thisWeekCount || 0),
       label: 'This Week',
       icon: Award,
       iconColor: 'text-purple-400',
@@ -44,3 +52,4 @@ export default function DashboardStats() {
     </div>
   )
 }
+
