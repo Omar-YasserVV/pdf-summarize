@@ -15,7 +15,7 @@ import {
 import { SummaryItem } from '@/components/SummaryItem'
 import { useHistoryQuery } from '../hooks/useHistory'
 import { useFilterStore } from '../store/useFilterStore'
-import { Sheet, SheetContent } from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { useExportPdfMutation, useExportDocxMutation } from '../../upload/hooks/useUpload'
 
@@ -225,9 +225,11 @@ function HistorySummaries() {
                 <span className="inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-wider text-cyan-400">
                   <Sparkles className="h-3 w-3" /> Previous Summary
                 </span>
-                <h2 className="text-lg font-bold text-white leading-tight break-words pr-8">
-                  {getTitle(selectedItem.filename)}
-                </h2>
+                <SheetTitle asChild>
+                  <h2 className="text-lg font-bold text-white leading-tight break-words pr-8">
+                    {getTitle(selectedItem.filename)}
+                  </h2>
+                </SheetTitle>
                 <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400 pt-1 border-t border-slate-800/80">
                   <span className="flex items-center gap-1">
                     <Calendar className="h-3.5 w-3.5 text-slate-500" />
@@ -278,7 +280,7 @@ function HistorySummaries() {
                 <span className="text-xs font-bold tracking-wider text-slate-400 uppercase block text-left">
                   Export Options
                 </span>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <Button
                     type="button"
                     disabled={exportPdfMutation.isPending}

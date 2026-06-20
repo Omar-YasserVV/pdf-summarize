@@ -3,7 +3,7 @@ import Link from 'next/link' // Or 'react-router-dom' depending on your framewor
 
 export default function NewSummaryHeader() {
   return (
-    <div className="flex items-center gap-4 p-4 text-white">
+    <div className="flex items-center gap-4 py-3 text-white">
       {/* Back Button linked to Dashboard */}
       <Link
         href="/dashboard"

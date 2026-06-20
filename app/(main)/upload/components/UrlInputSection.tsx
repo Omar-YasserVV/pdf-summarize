@@ -343,7 +343,7 @@ export default function UrlInputSection() {
               <span className="text-xs font-bold tracking-wider text-slate-400 uppercase block text-left">
                 Export Options
               </span>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <Button
                   type="button"
                   disabled={exportPdfMutation.isPending}

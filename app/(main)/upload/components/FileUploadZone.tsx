@@ -14,7 +14,9 @@ import {
   FileText,
   FileDown,
   Loader2,
+  Camera,
 } from 'lucide-react'
+import CameraScanner from './CameraScanner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -28,6 +30,7 @@ export default function FileUploadZone() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [file, setFile] = useState<File | null>(null)
   const [isDragActive, setIsDragActive] = useState(false)
+  const [isCameraActive, setIsCameraActive] = useState(false)
 
   // Customization Form States
   const [language, setLanguage] = useState('ar') // 'ar' | 'en' | 'both'
@@ -117,6 +120,7 @@ export default function FileUploadZone() {
     exportDocxMutation.reset()
     setExportError(null)
     setSessionId(generateUUID())
+    setIsCameraActive(false)
   }
 
   const handleCopySummary = (text: string) => {
@@ -208,30 +212,64 @@ export default function FileUploadZone() {
         onChange={handleInputChange}
       />
 
-      {/* 1. Drag & Drop Zone Canvas - hidden when a file is selected */}
-      {!file && (
-        <div
-          onClick={handleContainerClick}
-          onDragEnter={handleDrag}
-          onDragOver={handleDrag}
-          onDragLeave={handleDrag}
-          onDrop={handleDrop}
-          className={`group flex min-h-[220px] cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-8 text-center transition-all duration-200 select-none ${
-            isDragActive
-              ? 'border-cyan-400 bg-cyan-500/5 shadow-[0_0_20px_rgba(34,211,238,0.1)]'
-              : 'border-slate-800/80 bg-secondary hover:border-slate-700 hover:bg-[#0e1527]'
-          }`}
-        >
-          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-400 transition-transform group-hover:scale-105 group-active:scale-95">
-            <Upload className="h-6 w-6 stroke-[2]" />
+      {/* 1. Drag & Drop Zone Canvas or Camera Scanner - hidden when a file is selected */}
+      {!file && !isCameraActive && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
+          {/* Upload Card */}
+          <div
+            onClick={handleContainerClick}
+            onDragEnter={handleDrag}
+            onDragOver={handleDrag}
+            onDragLeave={handleDrag}
+            onDrop={handleDrop}
+            className={`group flex min-h-[220px] cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center transition-all duration-200 select-none ${
+              isDragActive
+                ? 'border-cyan-400 bg-cyan-500/5 shadow-[0_0_20px_rgba(34,211,238,0.1)]'
+                : 'border-slate-800/80 bg-secondary hover:border-slate-700 hover:bg-[#0e1527]'
+            }`}
+          >
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-400 transition-transform group-hover:scale-105 group-active:scale-95">
+              <Upload className="h-6 w-6 stroke-[2]" />
+            </div>
+            <h3 className="mt-5 text-sm font-bold text-white md:text-base">
+              Upload Document
+            </h3>
+            <p className="mt-2 text-xs font-medium text-slate-400 max-w-[220px]">
+              Drag & drop or tap to browse PDF, Word, TXT, JPG, PNG
+            </p>
           </div>
-          <h3 className="mt-5 text-sm font-bold text-white md:text-base">
-            Tap to browse or drag file
-          </h3>
-          <p className="mt-1.5 text-xs font-medium text-slate-400 md:text-sm">
-            Supports PDF, Word, TXT, JPG, PNG
-          </p>
+
+          {/* Scan Card */}
+          <div
+            onClick={() => setIsCameraActive(true)}
+            className="group flex min-h-[220px] cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-800/80 bg-secondary hover:border-slate-700 hover:bg-[#0e1527] p-6 text-center transition-all duration-200 select-none"
+          >
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-400 transition-transform group-hover:scale-105 group-active:scale-95">
+              <Camera className="h-6 w-6 stroke-[2]" />
+            </div>
+            <h3 className="mt-5 text-sm font-bold text-white md:text-base">
+              Scan Document
+            </h3>
+            <p className="mt-2 text-xs font-medium text-slate-400 max-w-[220px]">
+              Take a photo of your paper document directly using your camera
+            </p>
+          </div>
         </div>
+      )}
+
+      {/* Camera Scanner View */}
+      {!file && isCameraActive && (
+        <CameraScanner
+          onCaptureComplete={(capturedFile) => {
+            setFile(capturedFile)
+            setIsCameraActive(false)
+            summarizeMutation.reset()
+            exportPdfMutation.reset()
+            exportDocxMutation.reset()
+            setExportError(null)
+          }}
+          onCancel={() => setIsCameraActive(false)}
+        />
       )}
 
       {/* 2. File Selected Info & Customization form */}
@@ -425,7 +463,7 @@ export default function FileUploadZone() {
               <span className="text-xs font-bold tracking-wider text-slate-400 uppercase block text-left">
                 Export Options
               </span>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <Button
                   type="button"
                   disabled={exportPdfMutation.isPending}
@@ -481,8 +519,8 @@ export default function FileUploadZone() {
         </div>
       )}
 
-      {/* 6. Formats info board - hidden when file is selected or summary is shown */}
-      {!file && (
+      {/* 6. Formats info board - hidden when file is selected, camera is active, or summary is shown */}
+      {!file && !isCameraActive && (
         <div className="rounded-2xl border border-slate-800/80 bg-secondary p-5">
           <span className="text-xs font-bold tracking-wider text-slate-400 uppercase">
             Supported Formats

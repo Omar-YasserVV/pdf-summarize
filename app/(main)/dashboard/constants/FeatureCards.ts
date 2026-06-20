@@ -27,7 +27,7 @@ export const features = [
     title: 'Scan Image',
     description: 'Extract text from photos',
     icon: Scan,
-    href: '/upload?tab=text', // 👈 Updated (or 'files' if preferred)
+    href: '/upload?tab=files', // 👈 Updated (or 'files' if preferred)
     color: 'text-purple-400',
     bgColor: 'bg-purple-500/10',
     hoverRing: 'hover:ring-purple-500/50',
