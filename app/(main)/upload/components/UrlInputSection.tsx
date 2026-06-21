@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { useQueryClient } from '@tanstack/react-query'
 import {
   Sparkles,
   Copy,
@@ -23,6 +25,9 @@ import {
 } from '../hooks/useUpload'
 
 export default function UrlInputSection() {
+  const router = useRouter()
+  const queryClient = useQueryClient()
+
   const [url, setUrl] = useState('')
   const [language, setLanguage] = useState('ar') // 'ar' | 'en' | 'both'
   const [length, setLength] = useState('medium') // 'short' | 'medium' | 'long'
@@ -54,6 +59,13 @@ export default function UrlInputSection() {
   const summarizeMutation = useSummarizeUrlMutation()
   const exportPdfMutation = useExportPdfMutation()
   const exportDocxMutation = useExportDocxMutation()
+
+  useEffect(() => {
+    if (summarizeMutation.isSuccess && sessionId) {
+      queryClient.invalidateQueries({ queryKey: ['history'] })
+      router.push(`/history/${sessionId}`)
+    }
+  }, [summarizeMutation.isSuccess, sessionId, router, queryClient])
 
   const summaryText =
     summarizeMutation.data?.data

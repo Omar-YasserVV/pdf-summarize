@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { useQueryClient } from '@tanstack/react-query'
 import {
   Upload,
   Sparkles,
@@ -27,6 +29,9 @@ import {
 } from '../hooks/useUpload'
 
 export default function FileUploadZone() {
+  const router = useRouter()
+  const queryClient = useQueryClient()
+
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [file, setFile] = useState<File | null>(null)
   const [isDragActive, setIsDragActive] = useState(false)
@@ -63,6 +68,13 @@ export default function FileUploadZone() {
   const summarizeMutation = useSummarizeFileMutation()
   const exportPdfMutation = useExportPdfMutation()
   const exportDocxMutation = useExportDocxMutation()
+
+  useEffect(() => {
+    if (summarizeMutation.isSuccess && sessionId) {
+      queryClient.invalidateQueries({ queryKey: ['history'] })
+      router.push(`/history/${sessionId}`)
+    }
+  }, [summarizeMutation.isSuccess, sessionId, router, queryClient])
 
   const summaryText =
     summarizeMutation.data?.data
