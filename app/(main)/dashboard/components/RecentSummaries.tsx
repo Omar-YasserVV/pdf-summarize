@@ -97,6 +97,10 @@ export default function RecentSummaries() {
 
   const handleExportPdf = async (item: any) => {
     setExportError(null)
+    if (item.id === 'default') {
+      setExportError('This document was created without a valid session identifier and cannot be exported as PDF. Please try summarizing the document again.')
+      return
+    }
     try {
       const blob = await exportPdfMutation.mutateAsync(item.id)
       downloadBlob(blob, `${getTitle(item.filename)}-summary.pdf`)
@@ -107,6 +111,10 @@ export default function RecentSummaries() {
 
   const handleExportDocx = async (item: any) => {
     setExportError(null)
+    if (item.id === 'default') {
+      setExportError('This document was created without a valid session identifier and cannot be exported as DOCX. Please try summarizing the document again.')
+      return
+    }
     try {
       const blob = await exportDocxMutation.mutateAsync(item.id)
       downloadBlob(blob, `${getTitle(item.filename)}-summary.docx`)

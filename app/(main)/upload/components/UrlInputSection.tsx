@@ -61,11 +61,17 @@ export default function UrlInputSection() {
   const exportDocxMutation = useExportDocxMutation()
 
   useEffect(() => {
-    if (summarizeMutation.isSuccess && sessionId) {
-      queryClient.invalidateQueries({ queryKey: ['history'] })
-      router.push(`/history/${sessionId}`)
+    if (summarizeMutation.isSuccess) {
+      const isSaved = summarizeMutation.data?.saved !== false
+      if (isSaved) {
+        const targetId = summarizeMutation.data?.id || sessionId
+        if (targetId) {
+          queryClient.invalidateQueries({ queryKey: ['history'] })
+          router.push(`/history/${targetId}`)
+        }
+      }
     }
-  }, [summarizeMutation.isSuccess, sessionId, router, queryClient])
+  }, [summarizeMutation.isSuccess, summarizeMutation.data, sessionId, router, queryClient])
 
   const summaryText =
     summarizeMutation.data?.data
@@ -148,11 +154,18 @@ export default function UrlInputSection() {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!url) return
+
+    let currentSessionId = sessionId
+    if (!currentSessionId) {
+      currentSessionId = generateUUID()
+      setSessionId(currentSessionId)
+    }
+
     summarizeMutation.mutate({
       url,
       language,
       length,
-      session_id: sessionId || undefined,
+      session_id: currentSessionId,
     })
   }
 

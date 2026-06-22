@@ -12,6 +12,8 @@ export interface SummarizeResponse {
   message: string | null;
   data: SummarizeData | string;
   error: string | null;
+  id?: string;
+  saved?: boolean;
 }
 
 export interface SummarizeFilePayload {
@@ -30,6 +32,17 @@ export interface SummarizeUrlPayload {
   session_id?: string;
 }
 
+const generateUUID = () => {
+  if (typeof window !== "undefined" && window.crypto && window.crypto.randomUUID) {
+    return window.crypto.randomUUID()
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0
+    const v = c === 'x' ? r : (r & 0x3 | 0x8)
+    return v.toString(16)
+  })
+}
+
 export const uploadApis = {
   summarizeFile: async (payload: SummarizeFilePayload): Promise<SummarizeResponse> => {
     const formData = new FormData()
@@ -39,7 +52,7 @@ export const uploadApis = {
       formData.append("format", payload.format)
     }
     formData.append("length", payload.length || "medium")
-    formData.append("session_id", payload.session_id || "default")
+    formData.append("session_id", payload.session_id || generateUUID())
 
     return apiClient.post<SummarizeResponse>(`${BASE_URL}/summarize`, formData, {
       headers: {
@@ -56,7 +69,7 @@ export const uploadApis = {
       formData.append("format", payload.format)
     }
     formData.append("length", payload.length || "medium")
-    formData.append("session_id", payload.session_id || "default")
+    formData.append("session_id", payload.session_id || generateUUID())
 
     return apiClient.post<SummarizeResponse>(`${BASE_URL}/summarize-url`, formData, {
       headers: {
