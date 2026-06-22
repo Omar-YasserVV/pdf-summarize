@@ -1,7 +1,7 @@
 // store/useUploadStore.ts
 import { create } from 'zustand'
 
-export type TabValue = 'files' | 'link' | 'text'
+export type TabValue = 'files' | 'link' | 'image'
 
 interface UploadState {
   activeTab: TabValue

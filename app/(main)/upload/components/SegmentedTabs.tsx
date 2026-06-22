@@ -8,7 +8,7 @@ export default function SegmentedTabs() {
   const tabs = [
     { id: 'files', label: 'Files' },
     { id: 'link', label: 'Link' },
-    { id: 'text', label: 'Text' },
+    { id: 'image', label: 'Image' },
   ] as const
 
   return (

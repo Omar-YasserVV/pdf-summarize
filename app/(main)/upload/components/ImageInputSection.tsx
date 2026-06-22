@@ -16,7 +16,9 @@ import {
   FileText,
   FileDown,
   Loader2,
+  Camera,
 } from 'lucide-react'
+import CameraScanner from './CameraScanner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -26,14 +28,14 @@ import {
   useExportDocxMutation,
 } from '../hooks/useUpload'
 
-export default function FileUploadZone() {
+export default function ImageInputSection() {
   const router = useRouter()
   const queryClient = useQueryClient()
 
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [file, setFile] = useState<File | null>(null)
   const [isDragActive, setIsDragActive] = useState(false)
-
+  const [isCameraActive, setIsCameraActive] = useState(false)
 
   // Customization Form States
   const [language, setLanguage] = useState('ar') // 'ar' | 'en' | 'both'
@@ -130,6 +132,7 @@ export default function FileUploadZone() {
     exportDocxMutation.reset()
     setExportError(null)
     setSessionId(generateUUID())
+    setIsCameraActive(false)
   }
 
   const handleCopySummary = (text: string) => {
@@ -209,7 +212,7 @@ export default function FileUploadZone() {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
   }
 
-  const acceptedFormats = ['PDF', 'DOCX', 'TXT']
+  const acceptedFormats = ['JPG', 'JPEG', 'PNG']
 
   return (
     <div className="w-full space-y-6">
@@ -217,13 +220,13 @@ export default function FileUploadZone() {
         ref={fileInputRef}
         type="file"
         className="hidden"
-        accept=".pdf,.docx,.txt"
+        accept=".jpg,.jpeg,.png"
         onChange={handleInputChange}
       />
 
-      {/* 1. Drag & Drop Zone Canvas - hidden when a file is selected */}
-      {!file && (
-        <div className="w-full">
+      {/* 1. Drag & Drop Zone Canvas or Camera Scanner - hidden when a file is selected */}
+      {!file && !isCameraActive && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
           {/* Upload Card */}
           <div
             onClick={handleContainerClick}
@@ -241,13 +244,44 @@ export default function FileUploadZone() {
               <Upload className="h-6 w-6 stroke-[2]" />
             </div>
             <h3 className="mt-5 text-sm font-bold text-white md:text-base">
-              Upload Document
+              Upload Image
             </h3>
             <p className="mt-2 text-xs font-medium text-slate-400 max-w-[220px]">
-              Drag & drop or tap to browse PDF, Word, TXT
+              Drag & drop or tap to browse JPG, JPEG, PNG
+            </p>
+          </div>
+
+          {/* Scan Card */}
+          <div
+            onClick={() => setIsCameraActive(true)}
+            className="group flex min-h-[220px] cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-800/80 bg-secondary hover:border-slate-700 hover:bg-[#0e1527] p-6 text-center transition-all duration-200 select-none"
+          >
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-400 transition-transform group-hover:scale-105 group-active:scale-95">
+              <Camera className="h-6 w-6 stroke-[2]" />
+            </div>
+            <h3 className="mt-5 text-sm font-bold text-white md:text-base">
+              Scan Document
+            </h3>
+            <p className="mt-2 text-xs font-medium text-slate-400 max-w-[220px]">
+              Take a photo of your paper document directly using your camera
             </p>
           </div>
         </div>
+      )}
+
+      {/* Camera Scanner View */}
+      {!file && isCameraActive && (
+        <CameraScanner
+          onCaptureComplete={(capturedFile) => {
+            setFile(capturedFile)
+            setIsCameraActive(false)
+            summarizeMutation.reset()
+            exportPdfMutation.reset()
+            exportDocxMutation.reset()
+            setExportError(null)
+          }}
+          onCancel={() => setIsCameraActive(false)}
+        />
       )}
 
       {/* 2. File Selected Info & Customization form */}
@@ -348,7 +382,7 @@ export default function FileUploadZone() {
             className="h-12 w-full rounded-xl bg-cyan-400 font-bold text-slate-900 hover:bg-cyan-500 flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-cyan-500/10"
           >
             <Sparkles className="h-5 w-5" />
-            Summarize Document
+            Summarize Image
           </Button>
         </form>
       )}
@@ -365,10 +399,10 @@ export default function FileUploadZone() {
           </div>
           <div className="space-y-2">
             <h4 className="text-base font-bold text-slate-100 animate-pulse">
-              AI is reading your document...
+              AI is reading your image...
             </h4>
             <p className="text-xs text-slate-400 max-w-xs mx-auto">
-              Analyzing text pages and creating a concise, high-quality summary. This might take a few seconds.
+              Analyzing image contents and creating a concise, high-quality summary. This might take a few seconds.
             </p>
           </div>
         </div>
@@ -389,7 +423,7 @@ export default function FileUploadZone() {
             onClick={handleRemoveFile}
             className="h-9 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-4 rounded-xl cursor-pointer"
           >
-            Try Another File
+            Try Another Image
           </Button>
         </div>
       )}
@@ -491,14 +525,14 @@ export default function FileUploadZone() {
               onClick={handleRemoveFile}
               className="h-11 w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl cursor-pointer"
             >
-              Summarize Another File
+              Summarize Another Image
             </Button>
           </div>
         </div>
       )}
 
-      {/* 6. Formats info board - hidden when file is selected or summary is shown */}
-      {!file && (
+      {/* 6. Formats info board - hidden when file is selected, camera is active, or summary is shown */}
+      {!file && !isCameraActive && (
         <div className="rounded-2xl border border-slate-800/80 bg-secondary p-5">
           <span className="text-xs font-bold tracking-wider text-slate-400 uppercase">
             Supported Formats

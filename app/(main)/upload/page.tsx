@@ -7,7 +7,7 @@ import FileUploadZone from './components/FileUploadZone'
 import NewSummaryHeader from './components/NewSummaryHeader'
 import SegmentedTabs from './components/SegmentedTabs'
 import UrlInputSection from './components/UrlInputSection'
-import TextInputSection from './components/TextInputSection'
+import ImageInputSection from './components/ImageInputSection'
 import { useUploadStore, TabValue } from './store/useUploadStore'
 
 export default function Upload() {
@@ -19,7 +19,7 @@ export default function Upload() {
     const tabParam = searchParams.get('tab') as TabValue | null
 
     // Check if the query param is valid before updating the state
-    if (tabParam && ['files', 'link', 'text'].includes(tabParam)) {
+    if (tabParam && ['files', 'link', 'image'].includes(tabParam)) {
       setActiveTab(tabParam)
     }
   }, [searchParams, setActiveTab])
@@ -33,7 +33,7 @@ export default function Upload() {
       <div className="w-full transition-all duration-200">
         {activeTab === 'files' && <FileUploadZone />}
         {activeTab === 'link' && <UrlInputSection />}
-        {activeTab === 'text' && <TextInputSection />}
+        {activeTab === 'image' && <ImageInputSection />}
       </div>
     </div>
   )
