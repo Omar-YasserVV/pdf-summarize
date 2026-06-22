@@ -62,7 +62,7 @@ export default function SummaryDetailsPage() {
     )
   }
 
-  if (isError || !item) {
+  if (!item) {
     return (
       <div className="py-10 max-w-lg mx-auto">
         <div className="rounded-3xl border border-red-500/20 bg-red-500/5 p-8 text-center space-y-4">
