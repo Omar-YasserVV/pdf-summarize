@@ -1,11 +1,22 @@
+"use client"
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { MessageCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export default function FloatingAIButton() {
+  const pathname = usePathname()
+  
+  // Detect if we are on a history details page, e.g. /history/[id]
+  const historyMatch = pathname ? pathname.match(/^\/history\/([^/]+)$/) : null
+  const docId = historyMatch ? historyMatch[1] : null
+  
+  const href = docId ? `/ai-assistant?docId=${docId}` : '/ai-assistant'
+
   return (
     <Link
-      href="/ai" // Change this to your actual AI page route
+      href={href}
       className={cn(
         'fixed right-6 bottom-24 z-50 flex h-14 w-14 items-center justify-center rounded-full',
         'bg-[#38bdf8] text-white transition-all duration-300',
