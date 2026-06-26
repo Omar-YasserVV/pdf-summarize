@@ -37,8 +37,8 @@ export default function FilterBar() {
             className={cn(
               'h-9 cursor-pointer rounded-lg border px-4 text-[15px] font-medium transition-all',
               type === f.id
-                ? 'border-cyan-500/50 bg-primary/20 text-primary hover:bg-cyan-500/20'
-                : 'border-transparent bg-[#0f1323] text-slate-300 hover:bg-slate-800 hover:text-slate-200'
+                ? 'border-cyan-500/50 bg-primary/20 text-primary dark:text-cyan-400 hover:bg-cyan-500/20'
+                : 'border-transparent bg-secondary text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200'
             )}
           >
             {f.icon && <f.icon className="mr-2 h-4 w-4" />}
@@ -56,8 +56,8 @@ export default function FilterBar() {
             className={cn(
               'h-9 cursor-pointer rounded-lg border px-4 text-[15px] font-medium transition-all',
               language === f.id
-                ? 'border-cyan-500/50 bg-primary/20 text-cyan-400 hover:bg-cyan-500/20'
-                : 'border-transparent bg-[#0f1323] text-slate-300 hover:bg-slate-800 hover:text-slate-200'
+                ? 'border-cyan-500/50 bg-primary/20 text-primary dark:text-cyan-400 hover:bg-cyan-500/20'
+                : 'border-transparent bg-secondary text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200'
             )}
           >
             {f.label}

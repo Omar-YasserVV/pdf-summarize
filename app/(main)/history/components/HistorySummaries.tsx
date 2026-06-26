@@ -96,18 +96,18 @@ function HistorySummaries() {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-3">
-        <Loader2 className="h-8 w-8 animate-spin text-cyan-400" />
-        <p className="text-sm text-slate-400">Loading your history...</p>
+        <Loader2 className="h-8 w-8 animate-spin text-primary dark:text-cyan-400" />
+        <p className="text-sm text-muted-foreground">Loading your history...</p>
       </div>
     )
   }
 
   if (isError) {
     return (
-      <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-6 text-center space-y-3">
-        <AlertCircle className="h-8 w-8 text-red-400 mx-auto" />
-        <h4 className="font-bold text-sm text-slate-200">Failed to load history</h4>
-        <p className="text-xs text-slate-400">
+      <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6 text-center space-y-3 text-destructive">
+        <AlertCircle className="h-8 w-8 shrink-0 mx-auto" />
+        <h4 className="font-bold text-sm text-foreground">Failed to load history</h4>
+        <p className="text-xs text-muted-foreground">
           {error?.message || 'An unexpected error occurred while fetching your previous summaries.'}
         </p>
       </div>
@@ -116,10 +116,10 @@ function HistorySummaries() {
 
   if (filteredItems.length === 0) {
     return (
-      <div className="rounded-2xl border border-slate-800/80 bg-secondary/30 p-12 text-center space-y-2">
-        <FileText className="h-8 w-8 text-slate-600 mx-auto" />
-        <h4 className="font-bold text-sm text-slate-300">No summaries found</h4>
-        <p className="text-xs text-slate-500 max-w-xs mx-auto">
+      <div className="rounded-2xl border border-border bg-secondary/30 p-12 text-center space-y-2">
+        <FileText className="h-8 w-8 text-muted-foreground mx-auto" />
+        <h4 className="font-bold text-sm text-foreground">No summaries found</h4>
+        <p className="text-xs text-muted-foreground max-w-xs mx-auto">
           {searchQuery || type !== 'all' || language !== 'all'
             ? "Try adjusting your search query or filters to find what you're looking for."
             : 'You don\'t have any previous summaries yet. Start by uploading a file or entering a webpage URL.'}

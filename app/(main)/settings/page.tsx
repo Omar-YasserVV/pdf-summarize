@@ -30,13 +30,13 @@ function Settings() {
       {activeTab === 'security' && <SecuritySettings />}
 
       {activeTab === 'billing' && (
-        <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-8 text-center text-slate-400 shadow-2xl">
+        <div className="rounded-3xl border border-border bg-card p-8 text-center text-muted-foreground shadow-sm">
           Billing history and subscription management features are coming soon.
         </div>
       )}
 
       {activeTab === 'notifications' && (
-        <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-8 text-center text-slate-400 shadow-2xl">
+        <div className="rounded-3xl border border-border bg-card p-8 text-center text-muted-foreground shadow-sm">
           Email and push notification preferences are coming soon.
         </div>
       )}

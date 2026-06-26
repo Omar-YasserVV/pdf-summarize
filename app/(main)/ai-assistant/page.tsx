@@ -154,12 +154,12 @@ function AiAssistantContent() {
   }
 
   return (
-    <div className="flex flex-col gap-6 py-5 select-none text-slate-100 max-w-4xl mx-auto">
+    <div className="flex flex-col gap-6 py-5 select-none text-foreground max-w-4xl mx-auto">
       {/* Header */}
       <div className="flex flex-col gap-1.5 text-left max-md:px-6">
         <div className="flex items-center gap-2.5 text-cyan-400">
           <MessageCircle className="h-6 w-6" />
-          <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">AI Assistant</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">AI Assistant</h1>
         </div>
         <p className="text-xs sm:text-sm text-slate-400">
           Ask questions, verify details, and discuss key insights of any summarized document in your library.
@@ -167,15 +167,15 @@ function AiAssistantContent() {
       </div>
 
       {/* Document Selector Area */}
-      <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-5 sm:p-6 shadow-2xl space-y-4 max-md:mx-6 text-left">
+      <div className="rounded-3xl border border-border bg-card p-5 sm:p-6 shadow-2xl space-y-4 max-md:mx-6 text-left">
         <div className="space-y-2 relative" ref={dropdownRef}>
-          <Label className="font-bold text-slate-300 flex items-center gap-2">
+          <Label className="font-bold text-slate-700 dark:text-slate-300 flex items-center gap-2">
             <FileText className="h-4 w-4 text-cyan-400" />
             Select Document to Chat With
           </Label>
 
           {historyLoading ? (
-            <div className="h-11 flex items-center justify-center border border-slate-800 bg-[#0f172a] rounded-xl text-xs text-slate-400">
+            <div className="h-11 flex items-center justify-center border border-border bg-background rounded-xl text-xs text-slate-405 dark:text-slate-400">
               <Loader2 className="h-4 w-4 animate-spin text-cyan-400 mr-2" />
               Loading your document library...
             </div>
@@ -185,7 +185,7 @@ function AiAssistantContent() {
               Failed to load document library. Please refresh the page.
             </div>
           ) : historyItems.length === 0 ? (
-            <div className="p-4 border border-slate-800 bg-[#0f172a]/50 rounded-xl text-xs text-slate-400 text-center space-y-2">
+            <div className="p-4 border border-border bg-secondary/50 rounded-xl text-xs text-slate-500 dark:text-slate-400 text-center space-y-2">
               <p>No summarized documents available in history.</p>
               <Button
                 onClick={() => router.push("/upload")}
@@ -199,7 +199,7 @@ function AiAssistantContent() {
               <button
                 type="button"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="w-full h-11 px-4 rounded-xl border border-slate-800 bg-[#0f172a] text-slate-300 flex items-center justify-between text-sm hover:border-slate-700 hover:text-slate-100 transition-colors"
+                className="w-full h-11 px-4 rounded-xl border border-border bg-background text-slate-700 dark:text-slate-300 flex items-center justify-between text-sm hover:border-slate-400 dark:hover:border-slate-705 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
               >
                 <span className="truncate">
                   {selectedDoc ? cleanTitle(selectedDoc.filename) : "Select a document from library..."}
@@ -208,7 +208,7 @@ function AiAssistantContent() {
               </button>
 
               {isDropdownOpen && (
-                <div className="absolute z-50 w-full mt-2 rounded-xl border border-slate-800 bg-[#0e1324] shadow-2xl max-h-56 overflow-y-auto p-1.5 space-y-1">
+                <div className="absolute z-50 w-full mt-2 rounded-xl border border-border bg-card shadow-2xl max-h-56 overflow-y-auto p-1.5 space-y-1">
                   {historyItems.map((item) => (
                     <button
                       key={item.id}
@@ -220,7 +220,7 @@ function AiAssistantContent() {
                       className={`w-full text-left px-3 py-2.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-2 ${
                         selectedDocId === item.id
                           ? "bg-cyan-500/10 text-cyan-400"
-                          : "text-slate-400 hover:bg-slate-800/50 hover:text-slate-200"
+                          : "text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 hover:text-slate-800 dark:hover:text-slate-200"
                       }`}
                     >
                       <FileText className="h-3.5 w-3.5 shrink-0" />
@@ -238,21 +238,21 @@ function AiAssistantContent() {
       <div className="max-md:px-6">
         {!selectedDocId ? (
           /* Empty Chat Placeholder */
-          <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-12 text-center space-y-4 shadow-xl min-h-[400px] flex flex-col justify-center items-center">
+          <div className="rounded-3xl border border-border bg-card p-12 text-center space-y-4 shadow-xl min-h-[400px] flex flex-col justify-center items-center">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 animate-pulse mb-2">
               <Bot className="h-8 w-8" />
             </div>
-            <h3 className="text-base font-bold text-slate-200">No Document Selected</h3>
-            <p className="text-xs text-slate-400 max-w-xs mx-auto leading-relaxed">
+            <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">No Document Selected</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto leading-relaxed">
               Please choose a document from the dropdown above to start a conversation and ask questions about its content.
             </p>
           </div>
         ) : (
           /* Chat Window */
-          <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-6 shadow-2xl flex flex-col h-[550px] text-left">
+          <div className="rounded-3xl border border-border bg-card p-6 shadow-2xl flex flex-col h-[550px] text-left">
             {/* Informative Lightbulb Badge */}
-            <div className="flex items-center gap-2 rounded-2xl border border-cyan-500/20 bg-[#0e172a]/80 p-3.5 text-xs font-semibold text-cyan-400 mb-4 select-none">
-              <Lightbulb className="h-4.5 w-4.5 shrink-0 text-cyan-400" />
+            <div className="flex items-center gap-2 rounded-2xl border border-cyan-500/20 bg-secondary/80 p-3.5 text-xs font-semibold text-cyan-500 dark:text-cyan-400 mb-4 select-none">
+              <Lightbulb className="h-4.5 w-4.5 shrink-0 text-cyan-500 dark:text-cyan-400" />
               <span>Answers are based only on the contents of the selected document</span>
             </div>
 
@@ -270,7 +270,7 @@ function AiAssistantContent() {
                     {/* Icon / Avatar */}
                     <div
                       className={`flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-xl text-xs font-bold ${
-                        isUser ? "bg-cyan-500/10 text-cyan-400" : "bg-slate-800 text-slate-300"
+                        isUser ? "bg-cyan-500/10 text-cyan-400" : "bg-muted text-muted-foreground"
                       }`}
                     >
                       {isUser ? <User className="h-4.5 w-4.5" /> : <Bot className="h-4.5 w-4.5" />}
@@ -281,8 +281,8 @@ function AiAssistantContent() {
                       <div
                         className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                           isUser
-                            ? "bg-cyan-500/10 text-slate-100 rounded-tr-none border border-cyan-500/15"
-                            : "bg-[#0f172a] text-slate-300 rounded-tl-none border border-slate-800"
+                            ? "bg-cyan-500/10 text-slate-900 dark:text-slate-100 rounded-tr-none border border-cyan-500/15"
+                            : "bg-background text-slate-700 dark:text-slate-300 rounded-tl-none border border-border"
                         }`}
                       >
                         {msg.text}
@@ -298,10 +298,10 @@ function AiAssistantContent() {
               {/* Chatbot thinking loader */}
               {chatMutation.isPending && (
                 <div className="flex items-start gap-2.5 mr-auto text-left max-w-[85%]">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-800 text-slate-300">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-muted text-muted-foreground">
                     <Bot className="h-4.5 w-4.5" />
                   </div>
-                  <div className="rounded-2xl rounded-tl-none border border-slate-800 bg-[#0f172a] px-4 py-3 text-sm leading-relaxed text-slate-400 flex items-center gap-2">
+                  <div className="rounded-2xl rounded-tl-none border border-border bg-background px-4 py-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400 flex items-center gap-2">
                     <Loader2 className="h-4 w-4 animate-spin text-cyan-400" />
                     <span>Thinking...</span>
                   </div>
@@ -311,13 +311,13 @@ function AiAssistantContent() {
             </div>
 
             {/* Input Message Form */}
-            <form onSubmit={handleSend} className="flex gap-2 pt-3 border-t border-slate-800/80">
+            <form onSubmit={handleSend} className="flex gap-2 pt-3 border-t border-border">
               <Input
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 placeholder={`Ask a question about "${cleanTitle(selectedDoc?.filename || "")}"...`}
                 disabled={chatMutation.isPending}
-                className="flex-1 h-11 border-slate-800 bg-[#0f172a] px-4 text-slate-300 placeholder:text-slate-500 focus-visible:ring-1 focus-visible:ring-cyan-500 rounded-xl"
+                className="flex-1 h-11 border-border bg-background px-4 text-foreground placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:ring-1 focus-visible:ring-cyan-500 rounded-xl"
               />
               <Button
                 type="submit"

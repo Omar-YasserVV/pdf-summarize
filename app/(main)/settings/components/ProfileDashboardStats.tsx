@@ -17,7 +17,7 @@ export default function ProfileDashboardStats() {
 
   if (isLoading) {
     return (
-      <div className="flex h-48 w-full items-center justify-center rounded-3xl border border-slate-800 bg-[#161b2c] p-8 shadow-2xl">
+      <div className="flex h-48 w-full items-center justify-center rounded-3xl border border-border bg-card p-8 shadow-2xl">
         <div className="flex flex-col items-center gap-3">
           <Loader2 className="h-8 w-8 animate-spin text-cyan-400" />
           <p className="text-sm text-slate-400">Loading profile stats...</p>
@@ -30,8 +30,8 @@ export default function ProfileDashboardStats() {
     return (
       <div className="rounded-3xl border border-red-500/20 bg-red-500/5 p-6 text-center space-y-3">
         <AlertCircle className="h-8 w-8 text-red-400 mx-auto animate-pulse" />
-        <h4 className="font-bold text-sm text-slate-200">Failed to load statistics</h4>
-        <p className="text-xs text-slate-400">
+        <h4 className="font-bold text-sm text-slate-800 dark:text-slate-200">Failed to load statistics</h4>
+        <p className="text-xs text-slate-500 dark:text-slate-400">
           {error?.message || 'An error occurred while loading your profile dashboard data.'}
         </p>
       </div>
@@ -90,24 +90,24 @@ export default function ProfileDashboardStats() {
         {cards.map((c) => (
           <div
             key={c.title}
-            className="flex flex-col gap-2 rounded-2xl border border-slate-800/80 bg-[#161b2c] p-5 transition-all hover:scale-[1.02] hover:border-slate-700 shadow-xl"
+            className="flex flex-col gap-2 rounded-2xl border border-border bg-card p-5 transition-all hover:scale-[1.02] hover:border-border/80 shadow-xl"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-slate-400">{c.title}</span>
+              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">{c.title}</span>
               <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${c.bgColor}`}>
                 <c.icon className={`h-4.5 w-4.5 ${c.color}`} />
               </div>
             </div>
-            <span className="text-2xl font-bold text-slate-100">{c.value}</span>
+            <span className="text-2xl font-bold text-slate-800 dark:text-slate-100">{c.value}</span>
           </div>
         ))}
       </div>
 
       {/* Activity overview card */}
-      <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-6 space-y-4 shadow-2xl">
-        <div className="flex items-center gap-2 border-b border-slate-800 pb-3 text-cyan-400">
+      <div className="rounded-3xl border border-border bg-card p-6 space-y-4 shadow-2xl">
+        <div className="flex items-center gap-2 border-b border-border pb-3 text-cyan-400">
           <TrendingUp className="h-5 w-5" />
-          <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-200">
+          <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800 dark:text-slate-200">
             Summary Activity Overview
           </h4>
         </div>
@@ -121,10 +121,10 @@ export default function ProfileDashboardStats() {
           ].map((act) => (
             <div
               key={act.label}
-              className="flex flex-col items-center justify-center rounded-xl bg-[#0f172a]/40 p-4 border border-slate-800/50"
+              className="flex flex-col items-center justify-center rounded-xl bg-secondary/40 p-4 border border-border"
             >
               <span className="text-xs font-medium text-slate-500">{act.label}</span>
-              <span className="mt-1.5 text-lg font-bold text-slate-300">{act.value}</span>
+              <span className="mt-1.5 text-lg font-bold text-slate-800 dark:text-slate-300">{act.value}</span>
             </div>
           ))}
         </div>

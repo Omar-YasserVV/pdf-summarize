@@ -201,18 +201,18 @@ export default function QuizTab({ sessionId, docLanguage = "en" }: QuizTabProps)
     <div className="space-y-6">
       {/* Loading state */}
       {quizMutation.isPending && (
-        <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-8 text-center space-y-6">
+        <div className="rounded-3xl border border-border bg-card p-8 text-center space-y-6 shadow-sm">
           <div className="relative flex justify-center py-4">
             <div className="absolute h-16 w-16 animate-ping rounded-full bg-cyan-500/20"></div>
-            <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+            <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-full bg-cyan-500/10 text-cyan-500 border border-cyan-500/20 dark:text-cyan-400">
               <Sparkles className="h-7 w-7" />
             </div>
           </div>
           <div className="space-y-2">
-            <h4 className="text-base font-bold text-slate-100 animate-pulse">
+            <h4 className="text-base font-bold text-foreground animate-pulse">
               Generating your quiz...
             </h4>
-            <p className="text-xs text-slate-400 max-w-xs mx-auto">
+            <p className="text-xs text-muted-foreground max-w-xs mx-auto">
               Creating multiple-choice questions from the document summary content.
             </p>
           </div>
@@ -221,17 +221,17 @@ export default function QuizTab({ sessionId, docLanguage = "en" }: QuizTabProps)
 
       {/* Error state */}
       {quizMutation.isError && (
-        <div className="rounded-3xl border border-red-500/20 bg-red-500/5 p-6 text-center space-y-4">
-          <AlertCircle className="h-8 w-8 text-red-400 mx-auto" />
+        <div className="rounded-3xl border border-destructive/20 bg-destructive/5 p-6 text-center space-y-4 text-destructive">
+          <AlertCircle className="h-8 w-8 shrink-0 mx-auto" />
           <div>
-            <h4 className="font-bold text-sm text-slate-200">Failed to load quiz</h4>
-            <p className="text-xs text-slate-400 max-w-xs mx-auto mt-1">
+            <h4 className="font-bold text-sm">Failed to load quiz</h4>
+            <p className="text-xs text-muted-foreground max-w-xs mx-auto mt-1">
               {quizMutation.error.message || "An unexpected error occurred while generating the quiz."}
             </p>
           </div>
           <Button
             onClick={fetchQuiz}
-            className="h-9 px-4 rounded-xl bg-slate-800 text-slate-200 text-xs hover:bg-slate-700 font-bold"
+            className="h-9 px-4 rounded-xl bg-secondary text-foreground text-xs hover:bg-secondary/80 border border-border dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 dark:border-slate-700 font-bold"
           >
             <RefreshCw className="h-3.5 w-3.5 mr-1.5" /> Try Again
           </Button>
@@ -244,9 +244,9 @@ export default function QuizTab({ sessionId, docLanguage = "en" }: QuizTabProps)
           {questions.map((q, qIdx) => (
             <div
               key={qIdx}
-              className="rounded-3xl border border-slate-800 bg-[#161b2c] p-6 text-left space-y-4 shadow-2xl"
+              className="rounded-3xl border border-border bg-card p-6 text-left space-y-4 shadow-sm"
             >
-              <h4 className="text-sm font-bold text-slate-100">
+              <h4 className="text-sm font-bold text-foreground">
                 {qIdx + 1}. {q.question}
               </h4>
 
@@ -256,17 +256,17 @@ export default function QuizTab({ sessionId, docLanguage = "en" }: QuizTabProps)
                   const isCorrect = option.toLowerCase() === (q.correctAnswer || "").toLowerCase()
 
                   // Style variants depending on submission
-                  let optionStyle = "border-slate-800 bg-[#0f172a] text-slate-300 hover:border-slate-700 hover:bg-[#162038]"
+                  let optionStyle = "border-border bg-background text-foreground hover:border-border/80 hover:bg-secondary dark:border-slate-800 dark:bg-[#0f172a] dark:text-slate-300 dark:hover:border-slate-700 dark:hover:bg-[#162038]"
                   if (submitted) {
                     if (isCorrect) {
-                      optionStyle = "border-emerald-500 bg-emerald-500/10 text-emerald-400"
+                      optionStyle = "border-emerald-500 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
                     } else if (isSelected && !isCorrect) {
-                      optionStyle = "border-red-500 bg-red-500/10 text-red-400"
+                      optionStyle = "border-red-500 bg-red-500/10 text-red-650 dark:text-red-400"
                     } else {
-                      optionStyle = "border-slate-800/60 bg-[#0f172a]/60 text-slate-500 opacity-60"
+                      optionStyle = "border-border/60 bg-background/60 text-muted-foreground opacity-60 dark:border-slate-800/60 dark:bg-[#0f172a]/60 dark:text-slate-500"
                     }
                   } else if (isSelected) {
-                    optionStyle = "border-cyan-500/50 bg-[#172648] text-cyan-400 font-bold"
+                    optionStyle = "border-cyan-500 bg-cyan-500/10 text-cyan-750 font-bold dark:border-cyan-500/50 dark:bg-[#172648] dark:text-cyan-400"
                   }
 
                   return (
@@ -278,8 +278,8 @@ export default function QuizTab({ sessionId, docLanguage = "en" }: QuizTabProps)
                       className={`w-full text-left p-3.5 rounded-xl border text-xs font-semibold transition-all duration-200 flex items-center justify-between gap-3 ${optionStyle}`}
                     >
                       <span>{option}</span>
-                      {submitted && isCorrect && <CheckCircle className="h-4 w-4 text-emerald-400 shrink-0" />}
-                      {submitted && isSelected && !isCorrect && <XCircle className="h-4 w-4 text-red-400 shrink-0" />}
+                      {submitted && isCorrect && <CheckCircle className="h-4 w-4 text-emerald-500 dark:text-emerald-400 shrink-0" />}
+                      {submitted && isSelected && !isCorrect && <XCircle className="h-4 w-4 text-red-550 dark:text-red-400 shrink-0" />}
                     </button>
                   )
                 })}
@@ -288,10 +288,10 @@ export default function QuizTab({ sessionId, docLanguage = "en" }: QuizTabProps)
           ))}
 
           {/* Submission and Scoring panel */}
-          <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-6 text-center space-y-4">
+          <div className="rounded-3xl border border-border bg-card p-6 text-center space-y-4 shadow-sm">
             {!submitted ? (
               <div className="flex flex-col items-center gap-3">
-                <p className="text-xs text-slate-400 font-medium">
+                <p className="text-xs text-muted-foreground font-medium">
                   {allAnswered
                     ? "Great! You have answered all questions. Submit to see your score."
                     : `Please answer all questions (${Object.keys(selectedAnswers).length}/${questions.length})`}
@@ -306,18 +306,18 @@ export default function QuizTab({ sessionId, docLanguage = "en" }: QuizTabProps)
               </div>
             ) : (
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-bold">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-cyan-50 border border-cyan-200 text-cyan-850 text-sm font-bold dark:bg-cyan-500/10 dark:border-cyan-500/20 dark:text-cyan-400">
                   Score: {getScore()} / {questions.length} (
                   {Math.round((getScore() / questions.length) * 100)}%)
                 </div>
-                <p className="text-xs text-slate-400 font-medium max-w-xs mx-auto leading-relaxed">
+                <p className="text-xs text-muted-foreground font-medium max-w-xs mx-auto leading-relaxed">
                   {getScore() === questions.length
                     ? "Perfect! You read the summary exceptionally well."
                     : "Good job! You can review the correct options above or retry the quiz."}
                 </p>
                 <Button
                   onClick={fetchQuiz}
-                  className="h-11 px-8 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold cursor-pointer transition-colors"
+                  className="h-11 px-8 rounded-xl bg-secondary hover:bg-secondary/80 text-foreground border border-border font-bold cursor-pointer transition-colors dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 dark:border-slate-700"
                 >
                   <RefreshCw className="h-4 w-4 mr-2" /> Retry Quiz
                 </Button>

@@ -44,7 +44,7 @@ export default function RecentActivity() {
     <section className="w-full space-y-4">
       {/* Section Title */}
       <div className="px-1">
-        <h2 className="text-lg font-bold text-white">Recent Activity</h2>
+        <h2 className="text-lg font-bold text-foreground">Recent Activity</h2>
       </div>
 
       {/* Feed List Container */}

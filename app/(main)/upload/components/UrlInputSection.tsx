@@ -174,12 +174,12 @@ export default function UrlInputSection() {
   return (
     <div className="w-full space-y-6">
       {!summarizeMutation.isPending && !summarizeMutation.isSuccess && (
-        <form onSubmit={handleFormSubmit} className="space-y-6 text-slate-200">
+        <form onSubmit={handleFormSubmit} className="space-y-6 text-foreground">
           {/* Main Input Field Card */}
-          <div className="space-y-3 rounded-3xl border border-slate-800 bg-[#161b2c] p-6 shadow-2xl">
+          <div className="space-y-3 rounded-3xl border border-border bg-card p-6 shadow-2xl">
             <Label
               htmlFor="url-input"
-              className="text-sm font-semibold tracking-wide text-slate-200 flex items-center gap-1.5"
+              className="text-sm font-semibold tracking-wide text-slate-700 dark:text-slate-200 flex items-center gap-1.5"
             >
               <Link2 className="h-4 w-4 text-cyan-400" />
               Enter Webpage URL
@@ -193,27 +193,27 @@ export default function UrlInputSection() {
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://example.com/article"
-              className="h-12 border-slate-800 bg-[#0f172a] px-4 text-slate-300 placeholder:text-slate-500 focus-visible:ring-1 focus-visible:ring-cyan-500"
+              className="h-12 border-border bg-background px-4 text-foreground placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:ring-1 focus-visible:ring-cyan-500"
             />
             
-            <div className="flex items-center rounded-xl border border-slate-800 bg-[#0f172a]/50 p-4 text-xs text-slate-400 sm:text-sm">
+            <div className="flex items-center rounded-xl border border-border bg-secondary/50 p-4 text-xs text-slate-500 dark:text-slate-400 sm:text-sm">
               Paste any article, blog post, or web page URL. We&apos;ll extract and summarize the content for you automatically.
             </div>
           </div>
 
           {/* Configuration Card */}
           {url.trim() !== '' && (
-            <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-6 space-y-6">
-              <div className="flex items-center gap-2 border-b border-slate-800 pb-3 text-cyan-400">
+            <div className="rounded-3xl border border-border bg-card p-6 space-y-6">
+              <div className="flex items-center gap-2 border-b border-border pb-3 text-cyan-400">
                 <Settings className="h-5 w-5" />
-                <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-200">
+                <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-800 dark:text-slate-200">
                   Summary Settings
                 </h4>
               </div>
 
               {/* Language Selection */}
               <div className="space-y-3">
-                <div className="flex items-center gap-2 text-sm text-slate-300">
+                <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
                   <Globe className="h-4 w-4 text-cyan-400" />
                   <Label className="font-bold">Output Language</Label>
                 </div>
@@ -231,7 +231,7 @@ export default function UrlInputSection() {
                       className={`h-10 rounded-xl font-bold cursor-pointer text-xs ${
                         language === opt.value
                           ? 'bg-cyan-400 text-slate-900 hover:bg-cyan-500'
-                          : 'border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800'
+                          : 'border-border bg-background text-slate-700 dark:text-slate-300 hover:bg-muted'
                       }`}
                     >
                       {opt.label}
@@ -242,7 +242,7 @@ export default function UrlInputSection() {
 
               {/* Length Selection */}
               <div className="space-y-3">
-                <div className="flex items-center gap-2 text-sm text-slate-300">
+                <div className="flex items-center gap-2 text-sm text-slate-650 dark:text-slate-300">
                   <Sliders className="h-4 w-4 text-cyan-400" />
                   <Label className="font-bold">Summary Length</Label>
                 </div>
@@ -260,7 +260,7 @@ export default function UrlInputSection() {
                       className={`h-10 rounded-xl font-bold cursor-pointer text-xs ${
                         length === opt.value
                           ? 'bg-cyan-400 text-slate-900 hover:bg-cyan-500'
-                          : 'border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800'
+                          : 'border-border bg-background text-slate-700 dark:text-slate-300 hover:bg-muted'
                       }`}
                     >
                       {opt.label}
@@ -286,7 +286,7 @@ export default function UrlInputSection() {
 
       {/* Loading state */}
       {summarizeMutation.isPending && (
-        <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-8 text-center space-y-6">
+        <div className="rounded-3xl border border-border bg-card p-8 text-center space-y-6">
           <div className="relative flex justify-center py-4">
             <div className="absolute h-16 w-16 animate-ping rounded-full bg-cyan-500/20"></div>
             <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
@@ -294,10 +294,10 @@ export default function UrlInputSection() {
             </div>
           </div>
           <div className="space-y-2">
-            <h4 className="text-base font-bold text-slate-100 animate-pulse">
+            <h4 className="text-base font-bold text-slate-800 dark:text-slate-100 animate-pulse">
               AI is analyzing the webpage...
             </h4>
-            <p className="text-xs text-slate-400 max-w-xs mx-auto">
+            <p className="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto">
               Extracting webpage content and writing a high-quality summary. This might take a few seconds.
             </p>
           </div>
@@ -307,17 +307,17 @@ export default function UrlInputSection() {
       {/* Error state */}
       {displayError && (
         <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-5 space-y-3">
-          <div className="flex items-center gap-2 text-red-400">
+          <div className="flex items-center gap-2 text-red-450 dark:text-red-400">
             <AlertCircle className="h-5 w-5" />
             <h4 className="font-bold text-sm">Summarization Failed</h4>
           </div>
-          <p className="text-xs text-slate-400 leading-relaxed">
+          <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             {displayError || 'An error occurred while fetching and summarizing the URL.'}
           </p>
           <Button
             type="button"
             onClick={handleResetForm}
-            className="h-9 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-4 rounded-xl cursor-pointer"
+            className="h-9 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs px-4 rounded-xl cursor-pointer"
           >
             Try Another Link
           </Button>
@@ -327,11 +327,11 @@ export default function UrlInputSection() {
       {/* Success State Result */}
       {summarizeMutation.isSuccess && (
         <div className="space-y-4">
-          <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-6 sm:p-8 space-y-6 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+          <div className="rounded-3xl border border-border bg-card p-6 sm:p-8 space-y-6 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-border pb-4">
               <div className="flex items-center gap-2 text-cyan-400">
                 <Sparkles className="h-5 w-5" />
-                <h3 className="font-bold text-slate-100">Summary Result</h3>
+                <h3 className="font-bold text-slate-900 dark:text-slate-100">Summary Result</h3>
               </div>
               
               <Button
@@ -340,7 +340,7 @@ export default function UrlInputSection() {
                 className={`h-9 px-4 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                   copied
                     ? 'bg-emerald-500 text-white'
-                    : 'bg-[#0f172a] text-slate-300 hover:bg-slate-800 border border-slate-800'
+                    : 'bg-background text-slate-700 dark:text-slate-300 hover:bg-muted border border-border'
                 }`}
               >
                 {copied ? (
@@ -357,15 +357,15 @@ export default function UrlInputSection() {
               </Button>
             </div>
 
-            <div className="rounded-2xl bg-[#0f172a]/50 p-4 border border-slate-800/50">
-              <p className="text-sm leading-relaxed text-slate-300 text-left whitespace-pre-wrap">
+            <div className="rounded-2xl bg-secondary/40 p-4 border border-border">
+              <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300 text-left whitespace-pre-wrap">
                 {summaryText}
               </p>
             </div>
 
             {/* Export Section */}
             <div className="space-y-3">
-              <span className="text-xs font-bold tracking-wider text-slate-400 uppercase block text-left">
+              <span className="text-xs font-bold tracking-wider text-slate-500 dark:text-slate-400 uppercase block text-left">
                 Export Options
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -373,7 +373,7 @@ export default function UrlInputSection() {
                   type="button"
                   disabled={exportPdfMutation.isPending}
                   onClick={handleExportPdf}
-                  className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800 flex items-center justify-center gap-1.5"
+                  className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-border bg-background text-slate-700 dark:text-slate-300 hover:bg-muted flex items-center justify-center gap-1.5"
                 >
                   {exportPdfMutation.isPending ? (
                     <Loader2 className="h-4 w-4 animate-spin text-cyan-400" />
@@ -386,7 +386,7 @@ export default function UrlInputSection() {
                   type="button"
                   disabled={exportDocxMutation.isPending}
                   onClick={handleExportDocx}
-                  className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800 flex items-center justify-center gap-1.5"
+                  className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-border bg-background text-slate-700 dark:text-slate-300 hover:bg-muted flex items-center justify-center gap-1.5"
                 >
                   {exportDocxMutation.isPending ? (
                     <Loader2 className="h-4 w-4 animate-spin text-cyan-400" />
@@ -398,14 +398,14 @@ export default function UrlInputSection() {
                 <Button
                   type="button"
                   onClick={handleExportTxt}
-                  className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800 flex items-center justify-center gap-1.5"
+                  className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-border bg-background text-slate-700 dark:text-slate-300 hover:bg-muted flex items-center justify-center gap-1.5"
                 >
                   <FileDown className="h-4 w-4 text-cyan-400" />
                   Export TXT
                 </Button>
               </div>
               {exportError && (
-                <div className="flex items-center gap-2 text-red-400 text-xs text-left mt-2 animate-pulse">
+                <div className="flex items-center gap-2 text-red-450 dark:text-red-400 text-xs text-left mt-2 animate-pulse">
                   <AlertCircle className="h-4 w-4 shrink-0" />
                   <span>{exportError}</span>
                 </div>
@@ -415,7 +415,7 @@ export default function UrlInputSection() {
             <Button
               type="button"
               onClick={handleResetForm}
-              className="h-11 w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl cursor-pointer"
+              className="h-11 w-full bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold rounded-xl cursor-pointer"
             >
               Summarize Another Link
             </Button>

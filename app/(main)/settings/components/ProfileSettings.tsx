@@ -12,13 +12,13 @@ export default function ProfileSettings() {
   return (
     <div className="w-full space-y-6">
       {/* Main Content Card */}
-      <div className="space-y-6 rounded-3xl border border-slate-800 bg-[#161b2c] p-8">
+      <div className="space-y-6 rounded-3xl border border-border bg-card p-8">
         {/* Header Section */}
         <div className="space-y-1">
-          <h2 className="text-xl font-semibold text-slate-100">
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
             Profile Information
           </h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             Update your account profile information
           </p>
         </div>
@@ -28,12 +28,12 @@ export default function ProfileSettings() {
           <div className="space-y-3">
             <Button
               variant="outline"
-              className="border-slate-700 bg-[#1c223a] text-slate-200 hover:bg-slate-700"
+              className="border-border bg-background text-slate-700 dark:text-slate-200 hover:bg-muted"
             >
               <Upload className="mr-2 h-4 w-4" />
               Upload Photo
             </Button>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-505 dark:text-slate-500">
               JPG, PNG or GIF. Max size 2MB.
             </p>
           </div>
@@ -42,7 +42,7 @@ export default function ProfileSettings() {
         {/* Form Fields */}
         <div className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="fullName" className="text-slate-300">
+            <Label htmlFor="fullName" className="text-slate-700 dark:text-slate-300">
               Full Name
             </Label>
             <div className="relative">
@@ -50,13 +50,13 @@ export default function ProfileSettings() {
               <Input
                 id="fullName"
                 defaultValue={user.name || ''}
-                className="h-12 border-slate-800 bg-[#0f172a] pl-10 text-slate-200 focus:border-cyan-500 focus:ring-0"
+                className="h-12 border-border bg-background pl-10 text-foreground focus:border-cyan-500 focus:ring-0"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-slate-300">
+            <Label htmlFor="email" className="text-slate-700 dark:text-slate-300">
               Email Address
             </Label>
             <div className="relative flex">
@@ -64,27 +64,27 @@ export default function ProfileSettings() {
               <Input
                 id="email"
                 defaultValue={user.email || ''}
-                className="h-12 border-slate-800 bg-[#0f172a] pl-10 text-slate-200 focus:border-cyan-500 focus:ring-0"
+                className="h-12 border-border bg-background pl-10 text-foreground focus:border-cyan-500 focus:ring-0"
               />
             </div>
           </div>
         </div>
 
         {/* Account Status Info Box */}
-        <div className="space-y-4 rounded-2xl border border-slate-800/50 bg-[#1e293b] p-6">
+        <div className="space-y-4 rounded-2xl border border-border bg-secondary p-6">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-slate-400">
+            <span className="text-sm font-medium text-slate-550 dark:text-slate-400">
               Account Role
             </span>
             <Badge
               variant="secondary"
-              className="border-none bg-slate-800 text-slate-400 capitalize"
+              className="border-none bg-muted text-muted-foreground capitalize"
             >
               {user.role || 'Basic'}
             </Badge>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-slate-400">
+            <span className="text-sm font-medium text-slate-550 dark:text-slate-400">
               Subscription Status
             </span>
             <Badge className="border-none bg-cyan-500/20 px-4 text-cyan-400">
@@ -92,10 +92,10 @@ export default function ProfileSettings() {
             </Badge>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-slate-400">
+            <span className="text-sm font-medium text-slate-555 dark:text-slate-400">
               Member Since
             </span>
-            <span className="text-sm font-medium text-slate-200">
+            <span className="text-sm font-medium text-slate-800 dark:text-slate-200">
               June 18, 2026
             </span>
           </div>

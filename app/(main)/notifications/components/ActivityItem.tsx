@@ -13,18 +13,18 @@ interface ActivityItemProps {
 const statusConfig = {
   success: {
     icon: CheckCircle2,
-    color: 'text-[#0fb07b]',
-    bgColor: 'bg-[#0d3135]',
+    color: 'text-emerald-600 dark:text-[#0fb07b]',
+    bgColor: 'bg-emerald-50 dark:bg-[#0d3135]',
   },
   processing: {
     icon: Clock,
-    color: 'text-[#20c1db]',
-    bgColor: 'bg-[#133b50]',
+    color: 'text-sky-600 dark:text-[#20c1db]',
+    bgColor: 'bg-sky-50 dark:bg-[#133b50]',
   },
   error: {
     icon: AlertCircle,
-    color: 'text-[#ef4444]',
-    bgColor: 'bg-[#3c2030]',
+    color: 'text-red-600 dark:text-[#ef4444]',
+    bgColor: 'bg-red-50 dark:bg-[#3c2030]',
   },
 }
 
@@ -38,7 +38,7 @@ export function ActivityItem({
   const Icon = config.icon
 
   return (
-    <div className="group flex items-start gap-3 rounded-xl border border-slate-800 bg-secondary p-4">
+    <div className="group flex items-start gap-3 rounded-xl border border-border bg-card shadow-sm p-4">
       {/* Status Icon Wrapper */}
       <div
         className={cn(
@@ -50,14 +50,14 @@ export function ActivityItem({
       </div>
 
       {/* Text Content */}
-      <div className="flex flex-col gap-1">
-        <h3 className="text-lg! font-semibold text-slate-100 md:text-base">
+      <div className="flex flex-col gap-1 text-left">
+        <h3 className="text-lg! font-semibold text-foreground md:text-base">
           {title}
         </h3>
-        <p className="text-xs leading-relaxed text-slate-300 md:text-sm">
+        <p className="text-xs leading-relaxed text-muted-foreground md:text-sm">
           {description}
         </p>
-        <span className="mt-1 text-[11px] text-slate-500">{timestamp}</span>
+        <span className="mt-1 text-[11px] text-muted-foreground/80">{timestamp}</span>
       </div>
     </div>
   )

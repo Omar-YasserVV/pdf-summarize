@@ -136,7 +136,7 @@ export default function RecentSummaries() {
   return (
     <section className="w-full space-y-4">
       <div className="flex items-center justify-between px-1">
-        <h2 className="text-lg font-bold text-white">Recent Summaries</h2>
+        <h2 className="text-lg font-bold text-slate-900 dark:text-white">Recent Summaries</h2>
         <Link
           href="/history"
           className="text-sm font-medium text-sky-500 transition-colors hover:text-sky-400"
@@ -159,7 +159,7 @@ export default function RecentSummaries() {
         )}
 
         {!isLoading && !isError && historyItems.length === 0 && (
-          <div className="rounded-xl border border-slate-800/80 bg-secondary/20 p-8 text-center space-y-2">
+          <div className="rounded-xl border border-border bg-secondary/20 p-8 text-center space-y-2">
             <FileText className="h-6 w-6 text-slate-600 mx-auto" />
             <p className="text-xs text-slate-500">No recent summaries found.</p>
           </div>
@@ -192,7 +192,7 @@ export default function RecentSummaries() {
           if (!open) setSelectedItem(null)
         }}
       >
-        <SheetContent className="w-full sm:max-w-lg border-slate-800 bg-[#0e1222] p-6 text-slate-100 flex flex-col h-full overflow-y-auto">
+        <SheetContent className="w-full sm:max-w-lg border-border bg-background p-6 text-foreground flex flex-col h-full overflow-y-auto">
           {selectedItem && (
             <div className="space-y-6 flex-1 flex flex-col h-full">
               {/* Header */}
@@ -201,26 +201,26 @@ export default function RecentSummaries() {
                   <Sparkles className="h-3 w-3" /> Recent Summary Detail
                 </span>
                 <SheetTitle asChild>
-                  <h2 className="text-lg font-bold text-white leading-tight break-words pr-8">
+                  <h2 className="text-lg font-bold text-slate-900 dark:text-white leading-tight break-words pr-8">
                     {getTitle(selectedItem.filename)}
                   </h2>
                 </SheetTitle>
-                <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400 pt-1 border-t border-slate-800/80">
+                <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-400 pt-1 border-t border-border">
                   <span className="flex items-center gap-1">
-                    <Calendar className="h-3.5 w-3.5 text-slate-500" />
+                    <Calendar className="h-3.5 w-3.5 text-slate-400 dark:text-slate-500" />
                     {selectedItem.date}
                   </span>
                   <span className="flex items-center gap-1 capitalize">
-                    <Languages className="h-3.5 w-3.5 text-slate-500" />
+                    <Languages className="h-3.5 w-3.5 text-slate-400 dark:text-slate-500" />
                     Language: {selectedItem.language}
                   </span>
                 </div>
               </div>
 
               {/* Scrollable Summary Body */}
-              <div className="flex-1 min-h-0 overflow-y-auto rounded-2xl bg-[#080b15]/60 p-5 border border-slate-800/60 flex flex-col">
-                <div className="flex items-center justify-between border-b border-slate-800/80 pb-3 mb-4">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wide">
+              <div className="flex-1 min-h-0 overflow-y-auto rounded-2xl bg-secondary/40 p-5 border border-border flex flex-col">
+                <div className="flex items-center justify-between border-b border-border pb-3 mb-4">
+                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide">
                     Summary Text
                   </span>
                   <Button
@@ -229,7 +229,7 @@ export default function RecentSummaries() {
                     className={`h-8 px-3 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                       copied
                         ? 'bg-emerald-500 text-white'
-                        : 'bg-[#0f172a] text-slate-300 hover:bg-slate-800 border border-slate-800'
+                        : 'bg-background text-slate-700 dark:text-slate-300 hover:bg-muted border border-border'
                     }`}
                   >
                     {copied ? (
@@ -245,14 +245,14 @@ export default function RecentSummaries() {
                     )}
                   </Button>
                 </div>
-                <div className="flex-1 overflow-y-auto text-left text-sm leading-relaxed text-slate-300 whitespace-pre-wrap pr-1">
+                <div className="flex-1 overflow-y-auto text-left text-sm leading-relaxed text-slate-700 dark:text-slate-300 whitespace-pre-wrap pr-1">
                   {selectedItem.summary}
                 </div>
               </div>
 
               {/* Export Actions Section */}
-              <div className="space-y-3 pt-2 border-t border-slate-800/80">
-                <span className="text-xs font-bold tracking-wider text-slate-400 uppercase block text-left">
+              <div className="space-y-3 pt-2 border-t border-border">
+                <span className="text-xs font-bold tracking-wider text-slate-500 dark:text-slate-400 uppercase block text-left">
                   Export Options
                 </span>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -260,7 +260,7 @@ export default function RecentSummaries() {
                     type="button"
                     disabled={exportPdfMutation.isPending}
                     onClick={() => handleExportPdf(selectedItem)}
-                    className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800 flex items-center justify-center gap-1.5"
+                    className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-border bg-background text-slate-700 dark:text-slate-300 hover:bg-muted flex items-center justify-center gap-1.5"
                   >
                     {exportPdfMutation.isPending ? (
                       <Loader2 className="h-4 w-4 animate-spin text-cyan-400" />
@@ -273,7 +273,7 @@ export default function RecentSummaries() {
                     type="button"
                     disabled={exportDocxMutation.isPending}
                     onClick={() => handleExportDocx(selectedItem)}
-                    className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800 flex items-center justify-center gap-1.5"
+                    className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-border bg-background text-slate-700 dark:text-slate-300 hover:bg-muted flex items-center justify-center gap-1.5"
                   >
                     {exportDocxMutation.isPending ? (
                       <Loader2 className="h-4 w-4 animate-spin text-cyan-400" />
@@ -285,14 +285,14 @@ export default function RecentSummaries() {
                   <Button
                     type="button"
                     onClick={() => handleExportTxt(selectedItem)}
-                    className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800 flex items-center justify-center gap-1.5"
+                    className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-border bg-background text-slate-700 dark:text-slate-300 hover:bg-muted flex items-center justify-center gap-1.5"
                   >
                     <FileDown className="h-4 w-4 text-cyan-400" />
                     Export TXT
                   </Button>
                 </div>
                 {exportError && (
-                  <div className="flex items-center gap-2 text-red-400 text-xs text-left mt-2 animate-pulse">
+                  <div className="flex items-center gap-2 text-red-450 dark:text-red-400 text-xs text-left mt-2 animate-pulse">
                     <AlertCircle className="h-4 w-4 shrink-0" />
                     <span>{exportError}</span>
                   </div>

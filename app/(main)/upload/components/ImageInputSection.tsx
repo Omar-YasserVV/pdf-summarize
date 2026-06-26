@@ -250,16 +250,16 @@ export default function ImageInputSection() {
             className={`group flex min-h-[220px] cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-6 text-center transition-all duration-200 select-none ${
               isDragActive
                 ? 'border-cyan-400 bg-cyan-500/5 shadow-[0_0_20px_rgba(34,211,238,0.1)]'
-                : 'border-slate-800/80 bg-secondary hover:border-slate-700 hover:bg-[#0e1527]'
+                : 'border-border bg-card hover:border-border/80 hover:bg-muted'
             }`}
           >
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-400 transition-transform group-hover:scale-105 group-active:scale-95">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 transition-transform group-hover:scale-105 group-active:scale-95">
               <Upload className="h-6 w-6 stroke-[2]" />
             </div>
-            <h3 className="mt-5 text-sm font-bold text-white md:text-base">
+            <h3 className="mt-5 text-sm font-bold text-foreground md:text-base">
               Upload Image
             </h3>
-            <p className="mt-2 text-xs font-medium text-slate-400 max-w-[220px]">
+            <p className="mt-2 text-xs font-medium text-muted-foreground max-w-[220px]">
               Drag & drop or tap to browse JPG, JPEG, PNG
             </p>
           </div>
@@ -267,15 +267,15 @@ export default function ImageInputSection() {
           {/* Scan Card */}
           <div
             onClick={() => setIsCameraActive(true)}
-            className="group flex min-h-[220px] cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-800/80 bg-secondary hover:border-slate-700 hover:bg-[#0e1527] p-6 text-center transition-all duration-200 select-none"
+            className="group flex min-h-[220px] cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border bg-card hover:border-border/80 hover:bg-muted p-6 text-center transition-all duration-200 select-none"
           >
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-400 transition-transform group-hover:scale-105 group-active:scale-95">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-650 dark:text-cyan-400 transition-transform group-hover:scale-105 group-active:scale-95">
               <Camera className="h-6 w-6 stroke-[2]" />
             </div>
-            <h3 className="mt-5 text-sm font-bold text-white md:text-base">
+            <h3 className="mt-5 text-sm font-bold text-foreground md:text-base">
               Scan Document
             </h3>
-            <p className="mt-2 text-xs font-medium text-slate-400 max-w-[220px]">
+            <p className="mt-2 text-xs font-medium text-muted-foreground max-w-[220px]">
               Take a photo of your paper document directly using your camera
             </p>
           </div>
@@ -301,39 +301,39 @@ export default function ImageInputSection() {
       {file && !summarizeMutation.isPending && !summarizeMutation.isSuccess && (
         <form onSubmit={handleFormSubmit} className="space-y-6">
           {/* File Badge Card */}
-          <div className="flex items-center justify-between rounded-2xl border border-slate-800 bg-[#161b2c] p-4">
+          <div className="flex items-center justify-between rounded-2xl border border-border bg-card shadow-sm p-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
                 <FileText className="h-5 w-5" />
               </div>
               <div className="max-w-[200px] sm:max-w-[320px] overflow-hidden text-left">
-                <p className="truncate text-sm font-bold text-slate-200">{file.name}</p>
-                <p className="text-xs text-slate-400">{formatFileSize(file.size)}</p>
+                <p className="truncate text-sm font-bold text-foreground">{file.name}</p>
+                <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
               </div>
             </div>
             <Button
               type="button"
               onClick={handleRemoveFile}
               variant="ghost"
-              className="h-10 w-10 p-0 text-slate-500 hover:bg-slate-800 hover:text-red-400 rounded-full"
+              className="h-10 w-10 p-0 text-muted-foreground hover:bg-muted hover:text-red-550 rounded-full"
             >
               <Trash2 className="h-5 w-5" />
             </Button>
           </div>
 
           {/* Configuration Grid */}
-          <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-6 space-y-6">
-            <div className="flex items-center gap-2 border-b border-slate-800 pb-3 text-cyan-400">
+          <div className="rounded-3xl border border-border bg-card shadow-sm p-6 space-y-6">
+            <div className="flex items-center gap-2 border-b border-border pb-3 text-primary dark:text-cyan-400">
               <Settings className="h-5 w-5" />
-              <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-200">
+              <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground">
                 Summary Settings
               </h4>
             </div>
 
             {/* Language Selection */}
             <div className="space-y-3">
-              <div className="flex items-center gap-2 text-sm text-slate-300">
-                <Globe className="h-4 w-4 text-cyan-400" />
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Globe className="h-4 w-4 text-primary dark:text-cyan-400" />
                 <Label className="font-bold">Output Language</Label>
               </div>
               <div className="grid grid-cols-3 gap-2">
@@ -350,7 +350,7 @@ export default function ImageInputSection() {
                     className={`h-10 rounded-xl font-bold cursor-pointer text-xs ${
                       language === opt.value
                         ? 'bg-cyan-400 text-slate-900 hover:bg-cyan-500'
-                        : 'border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800'
+                        : 'border-border bg-background text-foreground hover:bg-secondary hover:border-border/80 dark:border-slate-800 dark:bg-[#0f172a] dark:text-slate-300 dark:hover:bg-slate-800'
                     }`}
                   >
                     {opt.label}
@@ -361,8 +361,8 @@ export default function ImageInputSection() {
 
             {/* Length Selection */}
             <div className="space-y-3">
-              <div className="flex items-center gap-2 text-sm text-slate-300">
-                <Sliders className="h-4 w-4 text-cyan-400" />
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Sliders className="h-4 w-4 text-primary dark:text-cyan-400" />
                 <Label className="font-bold">Summary Length</Label>
               </div>
               <div className="grid grid-cols-3 gap-2">
@@ -379,7 +379,7 @@ export default function ImageInputSection() {
                     className={`h-10 rounded-xl font-bold cursor-pointer text-xs ${
                       length === opt.value
                         ? 'bg-cyan-400 text-slate-900 hover:bg-cyan-500'
-                        : 'border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800'
+                        : 'border-border bg-background text-foreground hover:bg-secondary hover:border-border/80 dark:border-slate-800 dark:bg-[#0f172a] dark:text-slate-300 dark:hover:bg-slate-800'
                     }`}
                   >
                     {opt.label}
@@ -402,19 +402,19 @@ export default function ImageInputSection() {
 
       {/* 3. AI Analyzing / Loading state */}
       {summarizeMutation.isPending && (
-        <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-8 text-center space-y-6">
+        <div className="rounded-3xl border border-border bg-card p-8 text-center space-y-6 shadow-sm">
           <div className="relative flex justify-center py-4">
             {/* Pulsing AI Circle */}
             <div className="absolute h-16 w-16 animate-ping rounded-full bg-cyan-500/20"></div>
-            <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+            <div className="flex h-16 w-16 animate-pulse items-center justify-center rounded-full bg-cyan-500/10 text-cyan-500 border border-cyan-500/20 dark:text-cyan-400">
               <Sparkles className="h-7 w-7" />
             </div>
           </div>
           <div className="space-y-2">
-            <h4 className="text-base font-bold text-slate-100 animate-pulse">
+            <h4 className="text-base font-bold text-foreground animate-pulse">
               AI is reading your image...
             </h4>
-            <p className="text-xs text-slate-400 max-w-xs mx-auto">
+            <p className="text-xs text-muted-foreground max-w-xs mx-auto">
               Analyzing image contents and creating a concise, high-quality summary. This might take a few seconds.
             </p>
           </div>
@@ -423,18 +423,18 @@ export default function ImageInputSection() {
 
       {/* 4. Error State Displays */}
       {summarizeMutation.isError && (
-        <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-5 space-y-3">
-          <div className="flex items-center gap-2 text-red-400">
+        <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-5 space-y-3 text-destructive">
+          <div className="flex items-center gap-2 text-destructive">
             <AlertCircle className="h-5 w-5" />
             <h4 className="font-bold text-sm">Summarization Failed</h4>
           </div>
-          <p className="text-xs text-slate-400 leading-relaxed">
+          <p className="text-xs text-muted-foreground leading-relaxed">
             {summarizeMutation.error.message || 'An error occurred while uploading and summarizing.'}
           </p>
           <Button
             type="button"
             onClick={handleRemoveFile}
-            className="h-9 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-4 rounded-xl cursor-pointer"
+            className="h-9 bg-secondary hover:bg-secondary/80 text-foreground border border-border text-xs px-4 rounded-xl cursor-pointer"
           >
             Try Another Image
           </Button>
@@ -444,12 +444,12 @@ export default function ImageInputSection() {
       {/* 5. Success State Result Cards */}
       {summarizeMutation.isSuccess && (
         <div className="space-y-4">
-          <div className="rounded-3xl border border-slate-800 bg-[#161b2c] p-6 sm:p-8 space-y-6 shadow-2xl">
+          <div className="rounded-3xl border border-border bg-card p-6 sm:p-8 space-y-6 shadow-sm">
             {/* Result Header */}
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-              <div className="flex items-center gap-2 text-cyan-400">
+            <div className="flex items-center justify-between border-b border-border pb-4">
+              <div className="flex items-center gap-2 text-cyan-500 dark:text-cyan-400">
                 <Sparkles className="h-5 w-5" />
-                <h3 className="font-bold text-slate-100">Summary Result</h3>
+                <h3 className="font-bold text-foreground">Summary Result</h3>
               </div>
               
               {/* Actions */}
@@ -459,7 +459,7 @@ export default function ImageInputSection() {
                 className={`h-9 px-4 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
                   copied
                     ? 'bg-emerald-500 text-white'
-                    : 'bg-[#0f172a] text-slate-300 hover:bg-slate-800 border border-slate-800'
+                    : 'bg-secondary text-foreground hover:bg-secondary/80 border border-border dark:bg-[#0f172a] dark:text-slate-300 dark:hover:bg-slate-800 dark:border-slate-800'
                 }`}
               >
                 {copied ? (
@@ -477,15 +477,15 @@ export default function ImageInputSection() {
             </div>
 
             {/* Result Text Content */}
-            <div className="rounded-2xl bg-[#0f172a]/50 p-4 border border-slate-800/50">
-              <p className="text-sm leading-relaxed text-slate-300 text-left whitespace-pre-wrap">
+            <div className="rounded-2xl bg-secondary/40 p-4 border border-border dark:bg-[#0f172a]/50 dark:border-slate-800/50">
+              <p className="text-sm leading-relaxed text-foreground text-left whitespace-pre-wrap">
                 {summaryText}
               </p>
             </div>
 
             {/* Export Section */}
-            <div className="space-y-3">
-              <span className="text-xs font-bold tracking-wider text-slate-400 uppercase block text-left">
+            <div className="space-y-3 text-left">
+              <span className="text-xs font-bold tracking-wider text-muted-foreground uppercase block text-left">
                 Export Options
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -493,12 +493,12 @@ export default function ImageInputSection() {
                   type="button"
                   disabled={exportPdfMutation.isPending}
                   onClick={handleExportPdf}
-                  className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800 flex items-center justify-center gap-1.5"
+                  className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-sky-700 bg-sky-600 text-white hover:bg-sky-750 dark:border-slate-800 dark:bg-[#0f172a] dark:text-slate-300 dark:hover:bg-slate-800 flex items-center justify-center gap-1.5"
                 >
                   {exportPdfMutation.isPending ? (
-                    <Loader2 className="h-4 w-4 animate-spin text-cyan-400" />
+                    <Loader2 className="h-4 w-4 animate-spin text-white" />
                   ) : (
-                    <FileDown className="h-4 w-4 text-cyan-400" />
+                    <FileDown className="h-4 w-4 text-white dark:text-cyan-400" />
                   )}
                   Export PDF
                 </Button>
@@ -506,26 +506,26 @@ export default function ImageInputSection() {
                   type="button"
                   disabled={exportDocxMutation.isPending}
                   onClick={handleExportDocx}
-                  className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800 flex items-center justify-center gap-1.5"
+                  className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-sky-700 bg-sky-600 text-white hover:bg-sky-750 dark:border-slate-800 dark:bg-[#0f172a] dark:text-slate-300 dark:hover:bg-slate-800 flex items-center justify-center gap-1.5"
                 >
                   {exportDocxMutation.isPending ? (
-                    <Loader2 className="h-4 w-4 animate-spin text-cyan-400" />
+                    <Loader2 className="h-4 w-4 animate-spin text-white" />
                   ) : (
-                    <FileDown className="h-4 w-4 text-cyan-400" />
+                    <FileDown className="h-4 w-4 text-white dark:text-cyan-400" />
                   )}
                   Export DOCX
                 </Button>
                 <Button
                   type="button"
                   onClick={handleExportTxt}
-                  className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800 flex items-center justify-center gap-1.5"
+                  className="h-10 rounded-xl font-bold cursor-pointer text-xs border border-sky-700 bg-sky-600 text-white hover:bg-sky-750 dark:border-slate-800 dark:bg-[#0f172a] dark:text-slate-300 dark:hover:bg-slate-800 flex items-center justify-center gap-1.5"
                 >
-                  <FileDown className="h-4 w-4 text-cyan-400" />
+                  <FileDown className="h-4 w-4 text-white dark:text-cyan-400" />
                   Export TXT
                 </Button>
               </div>
               {exportError && (
-                <div className="flex items-center gap-2 text-red-400 text-xs text-left mt-2 animate-pulse">
+                <div className="flex items-center gap-2 text-red-500 text-xs text-left mt-2 animate-pulse">
                   <AlertCircle className="h-4 w-4 shrink-0" />
                   <span>{exportError}</span>
                 </div>
@@ -536,7 +536,7 @@ export default function ImageInputSection() {
             <Button
               type="button"
               onClick={handleRemoveFile}
-              className="h-11 w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl cursor-pointer"
+              className="h-11 w-full bg-secondary hover:bg-secondary/80 text-foreground border border-border font-bold rounded-xl cursor-pointer dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200"
             >
               Summarize Another Image
             </Button>
@@ -546,15 +546,15 @@ export default function ImageInputSection() {
 
       {/* 6. Formats info board - hidden when file is selected, camera is active, or summary is shown */}
       {!file && !isCameraActive && (
-        <div className="rounded-2xl border border-slate-800/80 bg-secondary p-5">
-          <span className="text-xs font-bold tracking-wider text-slate-400 uppercase">
+        <div className="rounded-2xl border border-border bg-card p-5 text-left shadow-sm">
+          <span className="text-xs font-bold tracking-wider text-muted-foreground uppercase block mb-3">
             Supported Formats
           </span>
-          <div className="mt-3 flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2">
             {acceptedFormats.map((format) => (
               <span
                 key={format}
-                className="rounded-xl border border-slate-800 bg-[#0f152a] px-3.5 py-1.5 text-xs font-semibold tracking-wide text-slate-300 transition-colors hover:border-slate-700 hover:text-white"
+                className="rounded-xl border border-border bg-secondary px-3.5 py-1.5 text-xs font-semibold tracking-wide text-foreground transition-colors hover:border-border/80 hover:bg-muted dark:border-slate-800 dark:bg-[#0f152a] dark:text-slate-300 dark:hover:border-slate-700 dark:hover:text-white"
               >
                 {format}
               </span>

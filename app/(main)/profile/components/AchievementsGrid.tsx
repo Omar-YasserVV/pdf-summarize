@@ -9,8 +9,8 @@ function AchievementCard({ label, emoji, isActive }: AchievementCardProps) {
     <div
       className={`flex flex-col items-center justify-center rounded-2xl border px-4 py-6 text-center transition-all duration-300 ${
         isActive
-          ? 'border-sky-500/40 bg-[#0a0f1d] shadow-[0_0_20px_rgba(56,189,248,0.1)]'
-          : 'border-slate-800/80 bg-[#0a0f1d]/60 opacity-80 hover:border-slate-700/80 hover:opacity-100'
+          ? 'border-sky-200 dark:border-sky-500/40 bg-sky-50/50 dark:bg-[#0a0f1d] shadow-[0_0_20px_rgba(56,189,248,0.1)]'
+          : 'border-border bg-secondary/50 opacity-85 hover:border-slate-400 dark:hover:border-slate-750/80 hover:opacity-100'
       }`}
     >
       {/* 3D-Style Emoji Graphic Container */}
@@ -19,7 +19,7 @@ function AchievementCard({ label, emoji, isActive }: AchievementCardProps) {
       </div>
 
       {/* Achievement Metric Tag Description */}
-      <span className="text-xs font-semibold tracking-tight text-slate-300 md:text-sm">
+      <span className="text-xs font-semibold tracking-tight text-slate-700 dark:text-slate-300 md:text-sm">
         {label}
       </span>
     </div>
@@ -60,7 +60,7 @@ export default function AchievementsGrid({ counters, activity }: AchievementsGri
   return (
     <div className="w-full space-y-3.5 text-left">
       {/* Section Label Title */}
-      <h3 className="px-1 text-base font-bold tracking-tight text-white md:text-lg">
+      <h3 className="px-1 text-base font-bold tracking-tight text-slate-900 dark:text-white md:text-lg">
         Achievements
       </h3>
 

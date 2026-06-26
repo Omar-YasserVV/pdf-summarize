@@ -25,7 +25,7 @@ export function DashboardFeatureCard({
     <Link
       href={href}
       className={cn(
-        'group relative flex flex-col items-center justify-center space-y-3 rounded-2xl border border-slate-800 bg-secondary p-8 transition-all duration-300',
+        'group relative flex flex-col items-center justify-center space-y-3 rounded-2xl border border-border bg-secondary p-8 transition-all duration-300',
         'hover:border-transparent hover:shadow-[0_0_20px_-5px_rgba(56,189,248,0.3)] hover:ring-2 active:scale-95',
         hoverRing
       )}
@@ -42,7 +42,7 @@ export function DashboardFeatureCard({
 
       {/* Text Content */}
       <div className="text-center">
-        <h3 className="text-sm font-bold text-slate-100 group-hover:text-white md:text-base">
+        <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 group-hover:text-slate-950 dark:group-hover:text-white md:text-base">
           {title}
         </h3>
       </div>

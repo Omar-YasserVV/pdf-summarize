@@ -23,10 +23,10 @@ export default function ProfileHeader() {
 
         {/* Identity Metadata Stack */}
         <div className="flex flex-col gap-2">
-          <h2 className="text-2xl leading-none font-medium tracking-tight text-white text-left">
+          <h2 className="text-2xl leading-none font-medium tracking-tight text-slate-900 dark:text-white text-left">
             {user.name ? user.name.split(' ')[0] : 'User'}
           </h2>
-          <p className="text-sm leading-none text-slate-300 text-left">{user.email}</p>
+          <p className="text-sm leading-none text-slate-500 dark:text-slate-300 text-left">{user.email}</p>
 
           {/* Subscription Tier Badge */}
           <div className="mt-1 self-start rounded-full bg-primary/15 px-2.5 py-0.5 text-[12px] font-medium tracking-wide text-primary capitalize">
@@ -40,7 +40,7 @@ export default function ProfileHeader() {
         <Button
           variant="ghost"
           size="icon"
-          className="h-11 w-11 cursor-pointer rounded-xl border border-slate-800/80 bg-[#0f1323] text-slate-400 transition-all hover:bg-slate-900 hover:text-white"
+          className="h-11 w-11 cursor-pointer rounded-xl border border-border bg-secondary text-slate-500 dark:text-slate-400 transition-all hover:bg-muted dark:hover:bg-slate-900 hover:text-slate-905 dark:hover:text-white"
         >
           <Settings className="h-6! w-6!" />
         </Button>

@@ -7,12 +7,12 @@ interface ActivityRowProps {
 function ActivityRow({ period, count, isLast }: ActivityRowProps) {
   return (
     <div
-      className={`flex items-center justify-between px-5 py-4 transition-colors hover:bg-slate-800/20 ${
-        !isLast ? 'border-b border-slate-800/60' : ''
+      className={`flex items-center justify-between px-5 py-4 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800/20 ${
+        !isLast ? 'border-b border-border' : ''
       }`}
     >
       {/* Time Period Label */}
-      <span className="text-sm font-medium text-slate-300 md:text-base">
+      <span className="text-sm font-medium text-slate-800 dark:text-slate-300 md:text-base">
         {period}
       </span>
 
@@ -44,12 +44,12 @@ export default function ActivitySummary({ activity }: ActivitySummaryProps) {
   return (
     <div className="w-full space-y-3.5 text-left">
       {/* Component Title */}
-      <h3 className="px-1 text-base font-bold tracking-tight text-white md:text-lg">
+      <h3 className="px-1 text-base font-bold tracking-tight text-slate-900 dark:text-white md:text-lg">
         Activity Summary
       </h3>
 
       {/* Main Structural Wrapper Container */}
-      <div className="overflow-hidden rounded-2xl border border-slate-800/80 bg-secondary shadow-xl">
+      <div className="overflow-hidden rounded-2xl border border-border bg-secondary shadow-xl">
         {activityData.map((item, index) => (
           <ActivityRow
             key={item.id}

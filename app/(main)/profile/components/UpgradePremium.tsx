@@ -29,10 +29,10 @@
       <>
         <div className="w-full rounded-2xl border border-primary/50 bg-primary/10 p-6 shadow-[0_4px_30px_rgba(0,0,0,0.4)]">
           <div className="space-y-1.5">
-            <h3 className="text-base font-bold tracking-tight text-white md:text-lg">
+            <h3 className="text-base font-bold tracking-tight text-slate-900 dark:text-white md:text-lg">
               Upgrade to Premium
             </h3>
-            <p className="max-w-md text-xs leading-relaxed text-slate-400 md:text-sm">
+            <p className="max-w-md text-xs leading-relaxed text-slate-500 dark:text-slate-400 md:text-sm">
               Unlock unlimited summaries, advanced AI features, and priority
               support.
             </p>
@@ -56,7 +56,7 @@
               {/* close button uses handler */}
               <button
                 onClick={handleCloseModal}
-                className="absolute top-4 right-4 z-30 rounded-full p-1.5 text-slate-400 transition-colors hover:bg-slate-800/60 hover:text-white"
+                className="absolute top-4 right-4 z-30 rounded-full p-1.5 text-slate-400 transition-colors hover:bg-slate-200 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white"
               >
                 <X className="h-5 w-5" />
               </button>

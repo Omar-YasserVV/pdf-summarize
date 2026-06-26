@@ -5,14 +5,11 @@ import Navbar from '@/components/Navbar'
 
 function Dashboard() {
   return (
-    <>
-      <Navbar />
-      <div className="flex flex-col gap-5 py-5 max-md:px-6">
-        <SearchBar />
-        <DashboardFeatureSection />
-        <RecentSummaries />
-      </div>
-    </>
+    <div className="flex flex-col gap-5 py-5 max-md:px-6">
+      <SearchBar />
+      <DashboardFeatureSection />
+      <RecentSummaries />
+    </div>
   )
 }
 

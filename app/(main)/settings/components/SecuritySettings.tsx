@@ -55,13 +55,13 @@ export default function SecuritySettings() {
 
   return (
     <div className="w-full space-y-6">
-      <div className="space-y-6 rounded-3xl border border-slate-800 bg-[#161b2c] p-8 shadow-2xl">
+      <div className="space-y-6 rounded-3xl border border-border bg-card p-8 shadow-2xl">
         {/* Header Section */}
         <div className="space-y-1">
-          <h2 className="text-xl font-semibold text-slate-100">
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
             Security Settings
           </h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             Change your password to secure your account
           </p>
         </div>
@@ -83,7 +83,7 @@ export default function SecuritySettings() {
         {/* Password Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="oldPassword" className="text-slate-300">
+            <Label htmlFor="oldPassword" className="text-slate-700 dark:text-slate-300">
               Current Password
             </Label>
             <div className="relative">
@@ -96,13 +96,13 @@ export default function SecuritySettings() {
                 value={oldPassword}
                 onChange={(e) => setOldPassword(e.target.value)}
                 placeholder="••••••"
-                className="h-12 border-slate-800 bg-[#0f172a] pl-10 text-slate-200 focus:border-cyan-500 focus:ring-0"
+                className="h-12 border-border bg-background pl-10 text-foreground focus:border-cyan-500 focus:ring-0"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="newPassword" className="text-slate-300">
+            <Label htmlFor="newPassword" className="text-slate-700 dark:text-slate-300">
               New Password
             </Label>
             <div className="relative">
@@ -115,13 +115,13 @@ export default function SecuritySettings() {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="••••••"
-                className="h-12 border-slate-800 bg-[#0f172a] pl-10 text-slate-200 focus:border-cyan-500 focus:ring-0"
+                className="h-12 border-border bg-background pl-10 text-foreground focus:border-cyan-500 focus:ring-0"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="confirmPassword" className="text-slate-300">
+            <Label htmlFor="confirmPassword" className="text-slate-700 dark:text-slate-300">
               Confirm New Password
             </Label>
             <div className="relative">
@@ -134,7 +134,7 @@ export default function SecuritySettings() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="••••••"
-                className="h-12 border-slate-800 bg-[#0f172a] pl-10 text-slate-200 focus:border-cyan-500 focus:ring-0"
+                className="h-12 border-border bg-background pl-10 text-foreground focus:border-cyan-500 focus:ring-0"
               />
             </div>
           </div>

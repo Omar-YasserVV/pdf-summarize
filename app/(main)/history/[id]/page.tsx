@@ -207,7 +207,7 @@ export default function SummaryDetailsPage() {
   }
 
   return (
-    <div className="flex flex-col gap-6 py-5 max-md:px-6 select-none text-slate-100">
+    <div className="flex flex-col gap-6 py-5 max-md:px-6 select-none text-foreground">
       {/* Back button and Meta Header */}
       <div className="flex flex-col gap-3 text-left">
         <div className="flex items-start gap-2">
@@ -216,21 +216,21 @@ export default function SummaryDetailsPage() {
               handleStopListen()
               router.push("/history")
             }}
-            className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-slate-800/40 text-slate-300 hover:bg-slate-800 hover:text-cyan-400 transition-colors"
+            className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-foreground hover:bg-secondary/80 hover:text-primary transition-colors border border-border"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <div className="space-y-1 flex-1">
-            <h1 className="text-xl sm:text-2xl font-bold text-white break-words pr-4 leading-tight">
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground break-words pr-4 leading-tight">
               {cleanTitle(item.filename)}
             </h1>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-400 pt-1">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground pt-1">
               <span className="flex items-center gap-1.5">
-                <Calendar className="h-3.5 w-3.5 text-slate-500" />
+                <Calendar className="h-3.5 w-3.5 text-muted-foreground/80" />
                 {item.date}
               </span>
               <span className="flex items-center gap-1.5 capitalize">
-                <Languages className="h-3.5 w-3.5 text-slate-500" />
+                <Languages className="h-3.5 w-3.5 text-muted-foreground/80" />
                 Language: {item.language}
               </span>
             </div>
@@ -245,8 +245,8 @@ export default function SummaryDetailsPage() {
           onClick={handleListen}
           className={`flex-1 min-h-[48px] rounded-xl font-bold flex items-center justify-center gap-2 cursor-pointer transition-all border ${
             isSpeaking && !isPaused
-              ? "bg-[#3b1c6e]/70 border-[#5e2eab] text-[#c0a2f5] animate-pulse"
-              : "bg-[#2e1a47] hover:bg-[#3d235e] border-[#4c2d75] text-[#d6bdf2]"
+              ? "bg-violet-100 border-violet-300 text-violet-750 animate-pulse dark:bg-[#3b1c6e]/70 dark:border-[#5e2eab] dark:text-[#c0a2f5]"
+              : "bg-violet-600 hover:bg-violet-750 border-violet-700 text-white dark:bg-[#2e1a47] dark:hover:bg-[#3d235e] dark:border-[#4c2d75] dark:text-[#d6bdf2]"
           }`}
         >
           {isSpeaking && !isPaused ? (
@@ -268,10 +268,10 @@ export default function SummaryDetailsPage() {
             type="button"
             disabled={exportPdfMutation.isPending}
             onClick={handleExportPdf}
-            className="flex-1 sm:flex-initial h-12 rounded-xl font-bold border border-[#1f5c80] bg-[#0f2c3d] text-[#7dd3fc] hover:bg-[#184661] flex items-center justify-center gap-1.5 cursor-pointer text-xs"
+            className="flex-1 sm:flex-initial h-12 rounded-xl font-bold border border-sky-700 bg-sky-600 text-white hover:bg-sky-750 dark:border-[#1f5c80] dark:bg-[#0f2c3d] dark:text-[#7dd3fc] dark:hover:bg-[#184661] flex items-center justify-center gap-1.5 cursor-pointer text-xs"
           >
             {exportPdfMutation.isPending ? (
-              <Loader2 className="h-4 w-4 animate-spin text-cyan-400" />
+              <Loader2 className="h-4 w-4 animate-spin text-white" />
             ) : (
               <FileDown className="h-4 w-4" />
             )}
@@ -281,10 +281,10 @@ export default function SummaryDetailsPage() {
             type="button"
             disabled={exportDocxMutation.isPending}
             onClick={handleExportDocx}
-            className="flex-1 sm:flex-initial h-12 rounded-xl font-bold border border-[#1f5c80] bg-[#0f2c3d] text-[#7dd3fc] hover:bg-[#184661] flex items-center justify-center gap-1.5 cursor-pointer text-xs"
+            className="flex-1 sm:flex-initial h-12 rounded-xl font-bold border border-sky-700 bg-sky-600 text-white hover:bg-sky-750 dark:border-[#1f5c80] dark:bg-[#0f2c3d] dark:text-[#7dd3fc] dark:hover:bg-[#184661] flex items-center justify-center gap-1.5 cursor-pointer text-xs"
           >
             {exportDocxMutation.isPending ? (
-              <Loader2 className="h-4 w-4 animate-spin text-cyan-400" />
+              <Loader2 className="h-4 w-4 animate-spin text-white" />
             ) : (
               <FileDown className="h-4 w-4" />
             )}
@@ -293,7 +293,7 @@ export default function SummaryDetailsPage() {
           <Button
             type="button"
             onClick={handleExportTxt}
-            className="flex-1 sm:flex-initial h-12 rounded-xl font-bold border border-[#1f5c80] bg-[#0f2c3d] text-[#7dd3fc] hover:bg-[#184661] flex items-center justify-center gap-1.5 cursor-pointer text-xs"
+            className="flex-1 sm:flex-initial h-12 rounded-xl font-bold border border-sky-700 bg-sky-600 text-white hover:bg-sky-750 dark:border-[#1f5c80] dark:bg-[#0f2c3d] dark:text-[#7dd3fc] dark:hover:bg-[#184661] flex items-center justify-center gap-1.5 cursor-pointer text-xs"
           >
             <FileDown className="h-4 w-4" />
             TXT
@@ -302,7 +302,7 @@ export default function SummaryDetailsPage() {
           {/* Share Link */}
           <button
             onClick={handleShare}
-            className="h-12 w-12 rounded-xl border border-slate-800 bg-[#0e1324] hover:bg-slate-800 text-slate-300 flex items-center justify-center cursor-pointer shrink-0 transition-colors"
+            className="h-12 w-12 rounded-xl border border-border bg-card hover:bg-muted text-foreground dark:border-slate-800 dark:bg-[#0e1324] dark:hover:bg-slate-800 dark:text-slate-300 flex items-center justify-center cursor-pointer shrink-0 transition-colors"
           >
             <Share2 className="h-4.5 w-4.5" />
           </button>
@@ -310,7 +310,7 @@ export default function SummaryDetailsPage() {
       </div>
 
       {exportError && (
-        <div className="flex items-center gap-2 text-red-400 text-xs text-left animate-pulse">
+        <div className="flex items-center gap-2 text-red-500 text-xs text-left animate-pulse">
           <AlertCircle className="h-4 w-4 shrink-0" />
           <span>{exportError}</span>
         </div>
@@ -318,28 +318,28 @@ export default function SummaryDetailsPage() {
 
       {/* Tabs list (Styled with tabs layout) */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="flex h-13 w-full items-center gap-1 rounded-full border border-slate-800/60 bg-[#0e1324]/60 p-1">
+        <TabsList className="flex h-13 w-full items-center gap-1 rounded-full border border-border bg-card p-1 dark:border-slate-800/60 dark:bg-[#0e1324]/60">
           <TabsTrigger
             value="summary"
-            className="flex-1 cursor-pointer rounded-full px-3 py-2.5 text-xs font-semibold text-slate-400 transition-all data-[state=active]:bg-[#16223f] data-[state=active]:text-cyan-400 data-[state=active]:border data-[state=active]:border-cyan-500/20 max-md:text-[11px] sm:text-sm"
+            className="flex-1 cursor-pointer rounded-full px-3 py-2.5 text-xs font-semibold text-muted-foreground transition-all data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:border data-[state=active]:border-primary/20 max-md:text-[11px] sm:text-sm dark:text-slate-400 dark:data-[state=active]:bg-[#16223f] dark:data-[state=active]:text-cyan-400 dark:data-[state=active]:border-cyan-500/20"
           >
             Summary
           </TabsTrigger>
           <TabsTrigger
             value="compare"
-            className="flex-1 cursor-pointer rounded-full px-3 py-2.5 text-xs font-semibold text-slate-400 transition-all hover:text-slate-200 data-[state=active]:bg-[#16223f] data-[state=active]:text-cyan-400 data-[state=active]:border data-[state=active]:border-cyan-500/20 max-md:text-[11px] sm:text-sm"
+            className="flex-1 cursor-pointer rounded-full px-3 py-2.5 text-xs font-semibold text-muted-foreground transition-all hover:text-foreground data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:border data-[state=active]:border-primary/20 max-md:text-[11px] sm:text-sm dark:text-slate-400 dark:hover:text-slate-200 dark:data-[state=active]:bg-[#16223f] dark:data-[state=active]:text-cyan-400 dark:data-[state=active]:border-cyan-500/20"
           >
             Compare
           </TabsTrigger>
           <TabsTrigger
             value="chat"
-            className="flex-1 cursor-pointer rounded-full px-3 py-2.5 text-xs font-semibold text-slate-400 transition-all hover:text-slate-200 data-[state=active]:bg-[#16223f] data-[state=active]:text-cyan-400 data-[state=active]:border data-[state=active]:border-cyan-500/20 max-md:text-[11px] sm:text-sm"
+            className="flex-1 cursor-pointer rounded-full px-3 py-2.5 text-xs font-semibold text-muted-foreground transition-all hover:text-foreground data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:border data-[state=active]:border-primary/20 max-md:text-[11px] sm:text-sm dark:text-slate-400 dark:hover:text-slate-200 dark:data-[state=active]:bg-[#16223f] dark:data-[state=active]:text-cyan-400 dark:data-[state=active]:border-cyan-500/20"
           >
             Chat
           </TabsTrigger>
           <TabsTrigger
             value="quiz"
-            className="flex-1 cursor-pointer rounded-full px-3 py-2.5 text-xs font-semibold text-slate-400 transition-all hover:text-slate-200 data-[state=active]:bg-[#16223f] data-[state=active]:text-cyan-400 data-[state=active]:border data-[state=active]:border-cyan-500/20 max-md:text-[11px] sm:text-sm"
+            className="flex-1 cursor-pointer rounded-full px-3 py-2.5 text-xs font-semibold text-muted-foreground transition-all hover:text-foreground data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:border data-[state=active]:border-primary/20 max-md:text-[11px] sm:text-sm dark:text-slate-400 dark:hover:text-slate-200 dark:data-[state=active]:bg-[#16223f] dark:data-[state=active]:text-cyan-400 dark:data-[state=active]:border-cyan-500/20"
           >
             Quiz
           </TabsTrigger>

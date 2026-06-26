@@ -169,7 +169,7 @@ export default function CameraScanner({ onCaptureComplete, onCancel }: CameraSca
   }
 
   return (
-    <div className="w-full rounded-3xl border border-slate-800 bg-[#161b2c] p-6 space-y-6 shadow-2xl overflow-hidden relative">
+    <div className="w-full rounded-3xl border border-border bg-card p-6 space-y-6 shadow-sm overflow-hidden relative">
       <style>{`
         @keyframes scan {
           0% { top: 0%; opacity: 0.8; }
@@ -191,10 +191,10 @@ export default function CameraScanner({ onCaptureComplete, onCancel }: CameraSca
       />
 
       {/* Title Header */}
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div className="flex items-center gap-2 text-cyan-400">
+      <div className="flex items-center justify-between border-b border-border pb-3">
+        <div className="flex items-center gap-2 text-primary dark:text-cyan-400">
           <Camera className="h-5 w-5" />
-          <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-200">
+          <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground">
             {previewUrl ? 'Review Captured Document' : 'Scan Document'}
           </h4>
         </div>
@@ -202,21 +202,21 @@ export default function CameraScanner({ onCaptureComplete, onCancel }: CameraSca
           type="button"
           onClick={onCancel}
           variant="ghost"
-          className="h-8 w-8 p-0 text-slate-400 hover:bg-slate-800 hover:text-white rounded-full"
+          className="h-8 w-8 p-0 text-muted-foreground hover:bg-muted hover:text-foreground rounded-full"
         >
           <X className="h-4 w-4" />
         </Button>
       </div>
 
       {/* Main View Area */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-slate-800 bg-black flex items-center justify-center">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border bg-black flex items-center justify-center">
         {error ? (
           /* Error State UI */
           <div className="p-6 text-center space-y-4 max-w-sm">
             <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10 text-red-400">
               <AlertTriangle className="h-6 w-6" />
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed">{error}</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">{error}</p>
             <div className="flex flex-col gap-2 pt-2">
               <Button
                 type="button"
@@ -230,7 +230,7 @@ export default function CameraScanner({ onCaptureComplete, onCancel }: CameraSca
                 type="button"
                 onClick={() => startCamera(facingMode)}
                 variant="outline"
-                className="border-slate-800 bg-transparent text-slate-300 hover:bg-slate-800 rounded-xl text-xs py-2 px-4"
+                className="border-border bg-secondary text-foreground hover:bg-secondary/80 rounded-xl text-xs py-2 px-4"
               >
                 <RefreshCw className="h-3 w-3 mr-2 inline" />
                 Retry Camera
@@ -296,7 +296,7 @@ export default function CameraScanner({ onCaptureComplete, onCancel }: CameraSca
               type="button"
               onClick={handleRetake}
               variant="outline"
-              className="border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800 rounded-xl font-bold text-xs h-10 px-3 sm:px-4 cursor-pointer"
+              className="border-border bg-secondary text-foreground hover:bg-secondary/80 rounded-xl font-bold text-xs h-10 px-3 sm:px-4 cursor-pointer dark:border-slate-800 dark:bg-[#0f172a] dark:text-slate-300 dark:hover:bg-slate-800"
             >
               <RotateCcw className="h-4 w-4 sm:mr-2" />
               <span className="hidden sm:inline">Retake</span>
@@ -318,7 +318,7 @@ export default function CameraScanner({ onCaptureComplete, onCancel }: CameraSca
               type="button"
               onClick={triggerFileBrowser}
               variant="outline"
-              className="border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800 rounded-xl font-bold text-xs h-10 px-3 sm:px-4 cursor-pointer"
+              className="border-border bg-secondary text-foreground hover:bg-secondary/80 rounded-xl font-bold text-xs h-10 px-3 sm:px-4 cursor-pointer dark:border-slate-800 dark:bg-[#0f172a] dark:text-slate-300 dark:hover:bg-slate-800"
               disabled={isLoading || !!error}
             >
               <ImageIcon className="h-4 w-4 sm:mr-2" />
@@ -341,7 +341,7 @@ export default function CameraScanner({ onCaptureComplete, onCancel }: CameraSca
               type="button"
               onClick={toggleFacingMode}
               variant="outline"
-              className="border-slate-800 bg-[#0f172a] text-slate-300 hover:bg-slate-800 rounded-xl font-bold text-xs h-10 px-3 sm:px-4 cursor-pointer"
+              className="border-border bg-secondary text-foreground hover:bg-secondary/80 rounded-xl font-bold text-xs h-10 px-3 sm:px-4 cursor-pointer dark:border-slate-800 dark:bg-[#0f172a] dark:text-slate-300 dark:hover:bg-slate-800"
               disabled={isLoading || !!error}
             >
               <RefreshCw className="h-4 w-4 sm:mr-2" />

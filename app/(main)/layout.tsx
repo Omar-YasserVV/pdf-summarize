@@ -9,7 +9,7 @@ export default function MainLayout({
 }) {
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <FloatingAIButton />
       <main className="container mx-auto mb-18">{children}</main>
       <BottomNav />

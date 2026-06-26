@@ -56,6 +56,6 @@ export const PRICING_PLANS = [
       "24/7 dedicated support",
     ],
     buttonText: "Upgrade Now",
-    borderColor: "border-slate-800",
+    borderColor: "border-border",
   },
 ]

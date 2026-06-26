@@ -22,7 +22,7 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
         value={value}
         onChange={(e) => onChange?.(e.target.value)}
         placeholder="Search summaries, topics, or keywords..."
-        className="h-14 w-full rounded-2xl border-slate-800 bg-secondary! pr-4 pl-12 text-slate-200 transition-all placeholder:text-slate-500 focus-visible:border-sky-500/50 focus-visible:ring-1 focus-visible:ring-sky-500/50"
+        className="h-14 w-full rounded-2xl border-border bg-secondary! pr-4 pl-12 text-foreground transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 focus-visible:border-sky-500/50 focus-visible:ring-1 focus-visible:ring-sky-500/50"
       />
 
       {/* Optional: Subtle Glow Effect on focus */}

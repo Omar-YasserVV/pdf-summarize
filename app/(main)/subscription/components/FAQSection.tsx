@@ -11,7 +11,7 @@ export default function FAQSection() {
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-16">
       {/* Title */}
-      <h2 className="mb-10 text-center text-2xl font-semibold text-slate-100">
+      <h2 className="mb-10 text-center text-2xl font-semibold text-foreground">
         Frequently Asked Questions
       </h2>
 
@@ -23,11 +23,11 @@ export default function FAQSection() {
             value={`item-${index}`}
             className="border-none" // Removing default shadcn border
           >
-            <div className="overflow-hidden rounded-2xl border border-slate-800 bg-[#161b2c] transition-all hover:border-slate-700">
-              <AccordionTrigger className="px-6 py-5 text-left font-medium text-slate-200 hover:text-white hover:no-underline">
+            <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all hover:border-border/80">
+              <AccordionTrigger className="px-6 py-5 text-left font-medium text-foreground hover:text-foreground/80 hover:no-underline">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="px-6 pb-5 leading-relaxed text-slate-400">
+              <AccordionContent className="px-6 pb-5 leading-relaxed text-muted-foreground">
                 {faq.answer}
               </AccordionContent>
             </div>

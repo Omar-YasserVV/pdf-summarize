@@ -14,7 +14,7 @@ export function StatCard({
   iconBg,
 }: StatCardProps) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-800/80 bg-secondary px-4 py-6 text-center shadow-lg transition-all hover:border-slate-700/80 hover:bg-[#0f172a]">
+    <div className="flex flex-col items-center justify-center rounded-2xl border border-border bg-secondary px-4 py-6 text-center shadow-lg transition-all hover:border-border/80 hover:bg-slate-100 dark:hover:bg-[#0f172a]">
       {/* Icon Wrapper box with themed low opacity accent */}
       <div
         className={`flex h-12 w-12 items-center justify-center rounded-xl ${iconBg} ${iconColor} mb-4`}
@@ -23,7 +23,7 @@ export function StatCard({
       </div>
 
       {/* Main Metric Value */}
-      <span className="text-2xl font-bold tracking-tight text-white md:text-3xl">
+      <span className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white md:text-3xl">
         {value}
       </span>
 
